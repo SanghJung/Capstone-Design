@@ -14,6 +14,5 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Table(name = "cafe")
 @SuperBuilder
-
 public class Cafe extends Place {
 }
