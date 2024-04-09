@@ -1,19 +1,19 @@
 package com.capstone.picknic.domain.place;
 
-
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+
 @Entity
+@Table(name = "place")
 @Getter
-@Table(name = "activity")
+@DiscriminatorValue("restaurant") // default is class name
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("activity")
 @SuperBuilder
-public class Activity extends Place{
+public class Restaurant extends Place{
+
 }
+

@@ -1,8 +1,10 @@
 package com.capstone.picknic.domain;
 
 
+import com.capstone.picknic.domain.place.Place;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "rating_review")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+
 public class RatingReview {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +25,13 @@ public class RatingReview {
     @Column(name = "blog_reviews_cnt")
     private int blogReviewsCnt;
 
-    private float rating;
+    @Column(name = "rating_value")
+    private float ratingValue;
+
+    @Builder
+    public RatingReview(int visitorReviewsCnt, int blogReviewsCnt, float rating) {
+        this.blogReviewsCnt = blogReviewsCnt;
+        this.visitorReviewsCnt = visitorReviewsCnt;
+        this.ratingValue = rating;
+    }
 }
