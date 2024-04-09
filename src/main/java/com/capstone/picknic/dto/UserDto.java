@@ -1,4 +1,4 @@
-package com.capstone.picknic.user.Dto;
+package com.capstone.picknic.dto;
 
 import lombok.Getter;
 import lombok.Setter;

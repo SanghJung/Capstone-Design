@@ -1,6 +1,6 @@
-package com.capstone.picknic.user.Repository;
+package com.capstone.picknic.Repository;
 
-import com.capstone.picknic.user.Domain.Users;
+import com.capstone.picknic.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

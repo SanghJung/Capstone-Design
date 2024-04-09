@@ -1,6 +1,6 @@
 package com.capstone.picknic.config;
 
-import com.capstone.picknic.user.Service.UserService;
+import com.capstone.picknic.Service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

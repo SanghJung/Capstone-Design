@@ -1,10 +1,9 @@
-package com.capstone.picknic.user.Service;
+package com.capstone.picknic.Service;
 
-import com.capstone.picknic.user.Domain.Users;
-import com.capstone.picknic.user.Dto.UserDto;
-import com.capstone.picknic.user.Repository.UserRepository;
+import com.capstone.picknic.domain.Users;
+import com.capstone.picknic.dto.UserDto;
+import com.capstone.picknic.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.capstone.picknic.user.Domain;
+package com.capstone.picknic.domain;
 
 
 import jakarta.persistence.*;
@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 
-public class User implements UserDetails {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
