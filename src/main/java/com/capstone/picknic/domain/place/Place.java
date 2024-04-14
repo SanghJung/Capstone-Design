@@ -5,9 +5,7 @@ import com.capstone.picknic.domain.Member;
 import com.capstone.picknic.domain.Menu;
 import com.capstone.picknic.domain.RatingReview;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -17,8 +15,9 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED) // use join strategy
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn(name = "Place_Type") // default is DType
+@Getter
 @SuperBuilder
-public abstract class Place {
+public class Place {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "place_id")
@@ -37,6 +36,9 @@ public abstract class Place {
     @Column(name = "place_url")
     private String url;
 
+    @Column(name = "catagory_name")
+    private String categoryName;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -54,6 +56,5 @@ public abstract class Place {
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL) // mappedBy는 연관관계에서 주인이 아닌 엔티티에서 수정을 불가하게 하는것
     private List<Menu> menus;                                 // cascade는 부모의 객체가 영속화,삭제 될때 자식객체도 같이
-
 
 }
