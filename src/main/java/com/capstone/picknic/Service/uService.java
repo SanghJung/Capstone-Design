@@ -15,11 +15,12 @@ public class uService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Long save(UserDto userDto){
+    public Long save(UserDto dto){   //회원 정보 추가 메서드
         return userRepository.save(Users.builder()
-                .login_id(userDto.getLogin_id())
-                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))//암호화
-                .build()).getUser_id();
+                .loginid(dto.getLoginid())
+                .password(bCryptPasswordEncoder.encode(dto.getPassword()))//암호화
+                .nickname(dto.getNickname())
+                .build()).getUser_id();//from Users
 
     }
 }

@@ -1,4 +1,4 @@
-package com.capstone.picknic.domain.place;
+/*ackage com.capstone.picknic.domain.place;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
@@ -10,3 +10,4 @@ import lombok.*;
 public class Coordinate {
     private double x, y;
 }
+*/

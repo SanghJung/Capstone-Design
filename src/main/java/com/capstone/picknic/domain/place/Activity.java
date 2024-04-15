@@ -1,4 +1,4 @@
-package com.capstone.picknic.domain.place;
+/*package com.capstone.picknic.domain.place;
 
 
 import jakarta.persistence.DiscriminatorValue;
@@ -16,4 +16,4 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorValue("activity")
 @SuperBuilder
 public class Activity extends Place{
-}
+}*/

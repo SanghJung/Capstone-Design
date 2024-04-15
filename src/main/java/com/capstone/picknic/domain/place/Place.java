@@ -1,7 +1,7 @@
-package com.capstone.picknic.domain.place;
+/*package com.capstone.picknic.domain.place;
 
 import com.capstone.picknic.domain.Detail;
-import com.capstone.picknic.domain.Member;
+//import com.capstone.picknic.domain.Member;
 import com.capstone.picknic.domain.Menu;
 import com.capstone.picknic.domain.RatingReview;
 import jakarta.persistence.*;
@@ -56,4 +56,4 @@ public abstract class Place {
     private List<Menu> menus;                                 // cascade는 부모의 객체가 영속화,삭제 될때 자식객체도 같이
 
 
-}
+}*/

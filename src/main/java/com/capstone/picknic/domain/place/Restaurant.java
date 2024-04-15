@@ -1,4 +1,4 @@
-package com.capstone.picknic.domain.place;
+/*package com.capstone.picknic.domain.place;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -16,4 +16,4 @@ import lombok.experimental.SuperBuilder;
 public class Restaurant extends Place{
 
 }
-
+*/

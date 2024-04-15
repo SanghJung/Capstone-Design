@@ -18,17 +18,10 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
     private final UserService userService;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable());
 
 
-        return http.build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService)
+        @Bean
+        public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService)
             throws Exception{
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userService)
@@ -36,7 +29,8 @@ public class SecurityConfig {
                 .and()
                 .build();
 
-    }
+        }
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -45,7 +39,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        return http.authorizeHttpRequests((authz) -> authz
+        return http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/login", "/signup", "/user").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((formLogin) ->

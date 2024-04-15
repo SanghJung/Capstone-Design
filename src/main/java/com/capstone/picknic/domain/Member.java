@@ -1,3 +1,4 @@
+/*
 package com.capstone.picknic.domain;
 
 import com.capstone.picknic.dto.MemberDto;
@@ -42,3 +43,4 @@ public class Member {
 //
 
 }
+*/

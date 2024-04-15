@@ -1,4 +1,4 @@
-package com.capstone.picknic.dto;
+/*package com.capstone.picknic.dto;
 
 
 import jakarta.persistence.Column;
@@ -30,4 +30,4 @@ public class MemberDto {
 //public ResponseEntity login(@Valid @RequestBody MemebrDto memberDto) {
 //    UserLoginResponseDto login = userService.login(loginUser);
 //    return new ResponseEntity<>(new BaseResult.Normal(login), HttpStatus.OK);
-//}
+//}*/

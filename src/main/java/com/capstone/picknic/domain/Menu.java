@@ -1,4 +1,4 @@
-package com.capstone.picknic.domain;
+/*package com.capstone.picknic.domain;
 
 
 import com.capstone.picknic.domain.place.Place;
@@ -31,4 +31,4 @@ public class Menu {
         this.name = name;
         this.place = place;
     }
-}
+}*/

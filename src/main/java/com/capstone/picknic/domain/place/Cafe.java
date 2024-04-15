@@ -1,4 +1,4 @@
-package com.capstone.picknic.domain.place;
+/*package com.capstone.picknic.domain.place;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -15,4 +15,4 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "cafe")
 @SuperBuilder
 public class Cafe extends Place {
-}
+}*/

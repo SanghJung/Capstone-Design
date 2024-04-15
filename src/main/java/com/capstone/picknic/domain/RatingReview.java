@@ -1,4 +1,4 @@
-package com.capstone.picknic.domain;
+/*package com.capstone.picknic.domain;
 
 import com.capstone.picknic.domain.place.Place;
 import jakarta.persistence.*;
@@ -34,3 +34,4 @@ public class RatingReview {
         this.ratingValue = rating;
     }
 }
+*/
