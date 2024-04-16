@@ -2,7 +2,6 @@ package com.capstone.picknic.dto;
 
 import com.capstone.picknic.domain.place.Coordinate;
 import com.capstone.picknic.domain.place.Place;
-import com.capstone.picknic.domain.place.Restaurant;
 import lombok.*;
 
 @Getter
@@ -10,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-public class PlaceApiDto {
+public class PlaceDto {
 
     private long id;
     private String addressName; //도로명
@@ -21,8 +20,10 @@ public class PlaceApiDto {
     private String x;
     private String y;
 
+
+    //for dependency
     public Place toEntity() {
-        Place place = Place.builder()
+        return Place.builder()
                 .coord(new Coordinate(Double.parseDouble(x), Double.parseDouble(y)))
                 .name(placeName)
                 .url(placeUrl)
@@ -30,6 +31,5 @@ public class PlaceApiDto {
                 .categoryName(categoryName)
                 .phoneNumber(phone)
                 .build();
-        return place;
     }
 }

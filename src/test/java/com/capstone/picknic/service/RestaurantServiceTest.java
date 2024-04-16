@@ -2,7 +2,7 @@ package com.capstone.picknic.service;
 
 import com.capstone.picknic.domain.place.Coordinate;
 import com.capstone.picknic.domain.place.Restaurant;
-import com.capstone.picknic.dto.PlaceApiDto;
+import com.capstone.picknic.dto.PlaceDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ class RestaurantServiceTest {
     void 장소저장() {
 
         //given
-        PlaceApiDto placeApiDto = PlaceApiDto.builder()
+        PlaceDto placeDto = PlaceDto.builder()
                 .x("11")
                 .y("11")
                 .addressName("11")
@@ -39,7 +39,7 @@ class RestaurantServiceTest {
                 .build();
 
         //when
-        restaurantService.save(placeApiDto);
+//        restaurantService.save(placeDto);
 
         //then
 

@@ -2,7 +2,7 @@ package com.capstone.picknic.dto;
 
 import lombok.*;
 
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @ToString
 public class QueryDto {
@@ -10,5 +10,4 @@ public class QueryDto {
     private String categoryCode;
     private int page;
     private int size;
-
 }
