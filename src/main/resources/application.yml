@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/tmpDB?serverTimezone=Asia/Seoul
-    username: #root (본인유저네임)
-    password: #5757anaN@@ (본인 비번)
+    username: root
+    password: 5757anaN@@
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
