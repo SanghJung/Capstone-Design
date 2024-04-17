@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +24,12 @@ public class KakaoSearchApiService {
     private final ActivityService activityService;
     private final CafeService cafeService;
     private final ObjectMapper objectMapper;
-    private final int MAX_PAGE = 45;
+    private final int MAX_PAGE = 3;
+//    private Map<String, String> city = new HashMap<String, String>(){{
+//        put("강남구","신사동, 압구정동, 논현1동, 논현2동, 청담동, 삼성2동, 삼성1동," +
+//                "역삼1동, 역삼2동, 대치4동, 대치2동, 대치1동, 도곡1동, 도곡2동, 개포4동, 개포1동, 개포2동, 개포3동, 일원1동, 일원본동, 수서동" +
+//                "세곡동");
+//    }};
 
     @Value("${kakao-key}")
     private String kakaoKey;
@@ -83,11 +86,12 @@ public class KakaoSearchApiService {
         for(int i = 1; i <= MAX_PAGE; i++) {
             queryDto.setPage(i);
             List<PlaceDto> placeDtos = searchKakaoApi(queryDto);
-            if (Objects.equals(queryDto.getCategoryCode(), "FD6"))
+
+            if (queryDto.getCategoryCode().equals("FD6"))
                 restaurantService.save(placeDtos);
-            else if(Objects.equals(queryDto.getCategoryCode(), "CE7"))
+            else if(queryDto.getCategoryCode().equals("CE7"))
                 cafeService.save(placeDtos);
-            else if(Objects.equals(queryDto.getCategoryCode(), "CT1") || Objects.equals(queryDto.getCategoryCode(), "AT4"))
+            else if(queryDto.getCategoryCode().equals("CT1") || queryDto.getCategoryCode().equals("AT4"))
                 activityService.save(placeDtos);
 
         }
