@@ -19,15 +19,6 @@ public class SecurityConfig {
     private final UserService userService;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable());
-
-
-        return http.build();
-    }
-
-    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService)
             throws Exception{
         return http.getSharedObject(AuthenticationManagerBuilder.class)
