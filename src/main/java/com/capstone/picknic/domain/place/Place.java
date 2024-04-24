@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn(name = "Place_Type") // default is DType
 @Getter
+@Setter
 @SuperBuilder
 public class Place {
 

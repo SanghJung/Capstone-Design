@@ -1,12 +1,9 @@
 package com.capstone.picknic.repository;
 
-import com.capstone.picknic.domain.place.Place;
+import com.capstone.picknic.domain.Info;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface PlaceRepository extends JpaRepository<Place, Long> {
-    List<Place> findAll();
+public interface InfoRepository extends JpaRepository<Info, Long> {
 }
