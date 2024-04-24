@@ -5,7 +5,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create # 자동 생성
+      ddl-auto: update # 자동 생성
     properties:
       hibernate:
         format_sql: true # DB로 날리는 쿼리를 보기쉽게함

@@ -25,11 +25,6 @@ public class KakaoSearchApiService {
     private final CafeService cafeService;
     private final ObjectMapper objectMapper;
     private final int MAX_PAGE = 3;
-//    private Map<String, String> city = new HashMap<String, String>(){{
-//        put("강남구","신사동, 압구정동, 논현1동, 논현2동, 청담동, 삼성2동, 삼성1동," +
-//                "역삼1동, 역삼2동, 대치4동, 대치2동, 대치1동, 도곡1동, 도곡2동, 개포4동, 개포1동, 개포2동, 개포3동, 일원1동, 일원본동, 수서동" +
-//                "세곡동");
-//    }};
 
     @Value("${kakao-key}")
     private String kakaoKey;

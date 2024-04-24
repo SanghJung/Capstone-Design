@@ -52,7 +52,7 @@ public class Place {
     private RatingReview ratingReview;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
-    @JoinColumn(name = "detail_id")
+    @PrimaryKeyJoinColumn
     private Detail detail;
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL) // mappedBy는 연관관계에서 주인이 아닌 엔티티에서 수정을 불가하게 하는것
