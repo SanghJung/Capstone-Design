@@ -21,7 +21,7 @@
 
                 <div class = "mb-2">
                     <form th:action="@{/user}" method="POST">
-                        <!-- 토큰을 추가하여 CSRF 공격 방지 -->
+                        <!토큰으로 CSRF 공격 방지>
                         <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
                         <div class="mb-3">
                             <label class="form-label text-white">닉네임</label>

@@ -34,7 +34,7 @@ public class Users implements UserDetails {
     private String password;
 
     @Column(name = "nickname", updatable = false, unique = true, nullable = false)
-    private String nickname;
+    private String nickname; //getNickname userNickname -> getUserNickname
 
     @Builder
     public Users(String loginid, String password, String nickname, String auth){
@@ -42,6 +42,15 @@ public class Users implements UserDetails {
         this.password = password;
         this.nickname = nickname;
     }
+    /*회원정보 변경*/
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
+    public  void updatePassword(String password){
+        this.password = password;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("users"));

@@ -1,4 +1,4 @@
-package com.capstone.picknic.Controller;
+/*package com.capstone.picknic.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,4 +13,10 @@ public class UserViewController {
     public String signup(){
         return "signup";
     }
-}
+
+    @GetMapping("updateform")
+    public String updateForm(){
+        return "updateform";
+    }
+
+}*/
