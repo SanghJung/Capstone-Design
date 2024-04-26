@@ -1,14 +1,20 @@
 import {useState} from 'react'
-import {useRecoilState} from 'recoil'
+import {useSetRecoilState} from 'recoil'
 import {courseNameState} from '../state/courseName'
-import {CenteredOverayForm} from './CenteredOverayForm'
-import {Container, Form, Row, Button} from 'react-bootstrap'
-import {styled} from 'styled-components'
+import {Container, Form, Row} from 'react-bootstrap'
+import {
+  CenteredOverayForm,
+  StyledRow,
+  StyledSection,
+  StyledSubmitButton,
+  StyledH1,
+} from './CenteredOverayForm'
+
 
 export const CreateCourse = () => {
   const [validated, setvalidated] = useState(false)
   const [validCourseName, setValidCourseName] = useState(false)
-  const [, setCourseName] = useRecoilState(courseNameState)
+  const setCourseName = useSetRecoilState(courseNameState)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -60,51 +66,3 @@ export const CreateCourse = () => {
     </CenteredOverayForm>
   )
 }
-
-const StyledRow = styled(Row)`
-  height: 80vh;
-  align-items: center;
-  justify-content: center;
-`
-
-const StyledSection = styled.section`
-  border-radius: 100%;
-  background-color: #295ff4;
-  height: 5vw;
-  width: 5vw;
-  color: white;
-  font-weight: 600;
-  font-size: 3vw;
-  margin: auto;
-`
-
-const StyledH1 = styled.h1`
-  padding: 30px;
-  font-weight: 600;
-  line-height: 50px;
-  text-align: left;
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  span {
-    color: #295ff4;
-  }
-`
-
-const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
-  width: 60%;
-  height: 50px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 50px;
-  border-color: #295ff4;
-  border-width: 2px;
-  color: #295ff4;
-  font-weight: 600;
-  font-size: 18px;
-  &: hover {
-    background-color: #295ff4;
-    filter: brightness(90%);
-    color: white;
-    font-weight: 1000;
-  }
-`
