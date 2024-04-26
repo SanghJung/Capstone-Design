@@ -1,20 +1,19 @@
-import './App.css'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom'
+import './App.scss'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {RecoilRoot} from 'recoil'
 import {Main} from './components/Main'
+import {CreateCourse} from './components/CreateCourse'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path='/'
-          element={<Main />}
-        />
-      </Routes>
+      <RecoilRoot>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/course/1' element={<CreateCourse />} />
+        </Routes>
+      </RecoilRoot>
     </BrowserRouter>
   )
 }
