@@ -7,7 +7,7 @@ import {
   StyledRow,
   StyledSection,
   StyledSubmitButton,
-  StyledH1,
+  StyledH1
 } from './CenteredOverayForm'
 
 

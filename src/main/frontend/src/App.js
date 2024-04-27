@@ -5,6 +5,7 @@ import {Main} from './components/Main'
 import {CreateCourse} from './components/CreateCourse'
 import {AddVisitPurpose} from './components/AddVisitPurpose'
 import {AddDescription} from './components/AddDescription'
+import {CreateCourseEnd} from './components/CreateCourseEnd'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/course/1' element={<CreateCourse />} />
           <Route path='/course/2' element={<AddVisitPurpose />} />
           <Route path='/course/3' element={<AddDescription />} />
+          <Route path='/course/0' element={<CreateCourseEnd />} />
         </Routes>
       </RecoilRoot>
     </BrowserRouter>

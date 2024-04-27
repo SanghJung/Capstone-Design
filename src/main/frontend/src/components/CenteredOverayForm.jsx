@@ -81,3 +81,9 @@ export const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
   }
 `
 
+export const StyledSubtitle = styled.p`
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  color: gray;
+  text-align: Center;
+`
