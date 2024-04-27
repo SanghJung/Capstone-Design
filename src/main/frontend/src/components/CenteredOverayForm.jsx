@@ -51,6 +51,17 @@ export const StyledH1 = styled.h1`
   }
 `
 
+export const StyledH2 = styled.h2`
+  padding: 0px;
+  font-weight: 300;
+  line-height: 0px;
+  text-align: Center;
+  color: gray;
+  span {
+    color: #295ff4;
+  }
+`
+
 export const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
   width: 60%;
   height: 50px;
