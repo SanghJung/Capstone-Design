@@ -2,7 +2,7 @@ package com.capstone.picknic.Controller;
 
 import ch.qos.logback.core.model.Model;
 import com.capstone.picknic.Repository.UserRepository;
-import com.capstone.picknic.Service.uService;
+import com.capstone.picknic.Service.UserService;
 import com.capstone.picknic.domain.Users;
 import com.capstone.picknic.dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,12 +21,12 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Controller
 public class UserApiController {
-    private final uService uservice;
+    private final UserService userService;
     private final UserRepository userRepository;
 
     @PostMapping("/user") //회원가입 시 다시 로그인 페이지로 넘어가는 컨트롤러
     public String signup(UserDto request){
-        uservice.save(request);
+        userService.save(request);
         return "redirect:/login";
     }
 

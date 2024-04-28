@@ -4,6 +4,8 @@ spring:
     url: jdbc:mysql://localhost:3306/user_table
     username: root
     password: 3050
+
+
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect

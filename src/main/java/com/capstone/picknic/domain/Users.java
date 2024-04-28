@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 
-
+//loginid
 public class Users implements UserDetails {
 
     @Id
@@ -27,8 +27,8 @@ public class Users implements UserDetails {
     @Column(name = "user_id", updatable = false, nullable = false)
     private Long user_id;
 
-    @Column(name = "loginid", updatable = false, unique = true, nullable = false)
-    private String loginid;
+    @Column(name = "loginId", updatable = false, unique = true, nullable = false)
+    private String loginId;
 
     @Column(name = "password", updatable = false, nullable = false)
     private String password;
@@ -37,8 +37,8 @@ public class Users implements UserDetails {
     private String nickname; //getNickname userNickname -> getUserNickname
 
     @Builder
-    public Users(String loginid, String password, String nickname, String auth){
-        this.loginid = loginid;
+    public Users(String loginId, String password, String nickname, String auth){
+        this.loginId = loginId;
         this.password = password;
         this.nickname = nickname;
     }
@@ -63,7 +63,7 @@ public class Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return loginid;
+        return loginId;
     }
 
     @Override

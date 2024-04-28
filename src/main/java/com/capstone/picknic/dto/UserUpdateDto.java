@@ -11,7 +11,7 @@ import lombok.*;
 public class UserUpdateDto {
 
     @NotBlank
-    private String loginid;
+    private String loginId;
 
     @NotBlank
     private String nickname;

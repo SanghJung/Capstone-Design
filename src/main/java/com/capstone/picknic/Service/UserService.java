@@ -19,17 +19,19 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     @Autowired
     private final UserRepository userRepository;
-
     private final UserUpdateRepository userUpdateRepository;
 
+
+
+
     @Override //login_id로 사용자 정보 가져오는 메서드(필수)
-    public Users loadUserByUsername(String loginid) {
-        return userRepository.findByLoginid(loginid)
-                .orElseThrow(() -> new IllegalArgumentException(loginid));
+    public Users loadUserByUsername(String loginId) {
+        return userRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new IllegalArgumentException(loginId));
     }
 
     public Long updateUser(UserUpdateDto userUpdateDto) {
-        Users users = userUpdateRepository.findByLoginid(userUpdateDto.getLoginid());
+        Users users = userUpdateRepository.findByLoginId(userUpdateDto.getLoginId());
         users.updateNickname(userUpdateDto.getNickname());
         users.updatePassword(userUpdateDto.getPassword());
 
@@ -43,11 +45,16 @@ public class UserService implements UserDetailsService {
         return users.getUser_id();
     }
 
+    public Long save(UserDto dto){   //회원 정보 추가 메서드
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+        return userRepository.save(Users.builder()
+                .loginId(dto.getLoginId())
+                .password(bCryptPasswordEncoder.encode(dto.getPassword()))//암호화
+                .nickname(dto.getNickname())
+                .build()).getUser_id();//from Users
 
-
-
-
+    }
 
 
 }
