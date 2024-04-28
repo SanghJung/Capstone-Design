@@ -19,13 +19,13 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 
-//loginid
+
 public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", updatable = false, nullable = false)
-    private Long user_id;
+    @Column(name = "userId", updatable = false, nullable = false)
+    private Long userId;
 
     @Column(name = "loginId", updatable = false, unique = true, nullable = false)
     private String loginId;

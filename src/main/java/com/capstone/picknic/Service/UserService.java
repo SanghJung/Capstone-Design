@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
         userUpdateRepository.save(users);
 
 
-        return users.getUser_id();
+        return users.getUserId();
     }
 
     public Long save(UserDto dto){   //회원 정보 추가 메서드
@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
                 .loginId(dto.getLoginId())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))//암호화
                 .nickname(dto.getNickname())
-                .build()).getUser_id();//from Users
+                .build()).getUserId();//from Users
 
     }
 
