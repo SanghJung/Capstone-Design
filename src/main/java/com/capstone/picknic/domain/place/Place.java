@@ -24,7 +24,7 @@ public class Place {
     @Column(name = "place_id")
     private Long id;
 
-    @Column(name = "place_name", nullable = false, length = 20)
+    @Column(name = "place_name", nullable = false)
     private String name;
 
     @Column(name = "place_address", nullable = false)
