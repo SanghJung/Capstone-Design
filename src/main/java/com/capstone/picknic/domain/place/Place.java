@@ -1,10 +1,8 @@
 package com.capstone.picknic.domain.place;
 
 import com.capstone.picknic.domain.Detail;
-import com.capstone.picknic.domain.Member;
 import com.capstone.picknic.domain.Menu;
 import com.capstone.picknic.domain.RatingReview;
-import com.capstone.picknic.dto.PlaceDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
