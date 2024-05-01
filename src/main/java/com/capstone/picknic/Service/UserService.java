@@ -1,6 +1,6 @@
 package com.capstone.picknic.service;
 
-import com.capstone.picknic.domain.Users;
+import com.capstone.picknic.domain.User;
 import com.capstone.picknic.dto.UserDto;
 import com.capstone.picknic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +18,11 @@ public class UserService implements UserDetailsService {
 
     public Long save(UserDto userDto){
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        return userRepository.save(Users.createUser(userDto)).getUserId();
+        return userRepository.save(User.createUser(userDto)).getUserId();
     }
 
     @Override //login_id로 사용자 정보 가져오는 메서드
-    public Users loadUserByUsername(String loginId){
+    public User loadUserByUsername(String loginId){
         return userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new IllegalArgumentException(loginId));
     }

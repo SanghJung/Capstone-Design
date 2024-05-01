@@ -1,7 +1,6 @@
 package com.capstone.picknic.service;
 
 import com.capstone.picknic.domain.place.Activity;
-import com.capstone.picknic.domain.place.Cafe;
 import com.capstone.picknic.dto.PlaceDto;
 import com.capstone.picknic.repository.ActivityRepository;
 import com.capstone.picknic.repository.PlaceRepository;

@@ -1,6 +1,5 @@
 package com.capstone.picknic.domain;
 
-import com.capstone.picknic.domain.place.Place;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

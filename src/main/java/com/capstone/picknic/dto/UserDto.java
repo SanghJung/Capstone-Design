@@ -9,6 +9,6 @@ public class UserDto {
     private Long userId;
     private String loginId;
     private String password;
-    private String nickname;
+    private String nickName;
 
 }

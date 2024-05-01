@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Users implements UserDetails {
+public class User implements UserDetails {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -29,7 +29,7 @@ public class Users implements UserDetails {
     private String password;
 
     @Column(name = "nick_name")
-    private String nickname;
+    private String nickName;
 
 //        @Builder
 //    public Users(String loginId, String password, String nickname, String auth){
@@ -37,8 +37,8 @@ public class Users implements UserDetails {
 //        this.password = password;
 //        this.nickname = nickname;
 //    }
-    public static Users createUser(UserDto userDto) {
-        return new Users(userDto.getUserId(), userDto.getLoginId(), userDto.getPassword(), userDto.getNickname());
+    public static User createUser(UserDto userDto) {
+        return new User(userDto.getUserId(), userDto.getLoginId(), userDto.getPassword(), userDto.getNickName());
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

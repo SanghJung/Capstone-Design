@@ -1,7 +1,5 @@
 package com.capstone.picknic.service;
 
-import com.capstone.picknic.domain.place.Coordinate;
-import com.capstone.picknic.domain.place.Restaurant;
 import com.capstone.picknic.dto.PlaceDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
