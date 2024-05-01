@@ -1,9 +1,7 @@
 package com.capstone.picknic.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
 
 import java.util.ArrayList;
@@ -13,6 +11,7 @@ import java.util.List;
 @Getter
 @Table(name = "course")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Course {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")

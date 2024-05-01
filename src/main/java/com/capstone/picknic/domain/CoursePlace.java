@@ -3,6 +3,7 @@ package com.capstone.picknic.domain;
 import com.capstone.picknic.domain.place.Place;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "course_place")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class CoursePlace {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

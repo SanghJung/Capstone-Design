@@ -2,6 +2,7 @@ package com.capstone.picknic.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "course_hashtag")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class CourseHashtag {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
