@@ -1,8 +1,8 @@
-package com.capstone.picknic.Service;
+package com.capstone.picknic.service;
 
-import com.capstone.picknic.Repository.UserUpdateRepository;
-import com.capstone.picknic.domain.Users;
-import com.capstone.picknic.Repository.UserRepository;
+import com.capstone.picknic.repository.UserUpdateRepository;
+import com.capstone.picknic.domain.User;
+import com.capstone.picknic.repository.UserRepository;
 import com.capstone.picknic.dto.UserDto;
 import com.capstone.picknic.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -25,30 +23,30 @@ public class UserService implements UserDetailsService {
 
 
     @Override //login_id로 사용자 정보 가져오는 메서드(필수)
-    public Users loadUserByUsername(String loginId) {
+    public User loadUserByUsername(String loginId) {
         return userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new IllegalArgumentException(loginId));
     }
 
     public Long updateUser(UserUpdateDto userUpdateDto) {
-        Users users = userUpdateRepository.findByLoginId(userUpdateDto.getLoginId());
-        users.updateNickname(userUpdateDto.getNickname());
-        users.updatePassword(userUpdateDto.getPassword());
+        User user = userUpdateRepository.findByLoginId(userUpdateDto.getLoginId());
+        user.updateNickname(userUpdateDto.getNickname());
+        user.updatePassword(userUpdateDto.getPassword());
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodePw = encoder.encode(userUpdateDto.getPassword());
-        users.updatePassword(encodePw);
+        user.updatePassword(encodePw);
 
-        userUpdateRepository.save(users);
+        userUpdateRepository.save(user);
 
 
-        return users.getUserId();
+        return user.getUserId();
     }
 
     public Long save(UserDto dto){   //회원 정보 추가 메서드
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        return userRepository.save(Users.builder()
+        return userRepository.save(User.builder()
                 .loginId(dto.getLoginId())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))//암호화
                 .nickname(dto.getNickname())

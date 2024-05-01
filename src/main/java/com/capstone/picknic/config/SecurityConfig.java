@@ -1,16 +1,13 @@
 package com.capstone.picknic.config;
 
-import com.capstone.picknic.Service.UserService;
+import com.capstone.picknic.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
 public class SecurityConfig {
-    private final UserService userService;
+
 
 
 
@@ -36,13 +33,6 @@ public class SecurityConfig {
 
     }
 
-/*
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-        return auth.build();
-    }
-*/
 
 
     @Bean

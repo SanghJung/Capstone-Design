@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,14 +19,14 @@ import java.util.List;
 @Getter
 
 
-public class Users implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId", updatable = false, nullable = false)
+    @Column(name = "user_id", updatable = false, nullable = false)
     private Long userId;
 
-    @Column(name = "loginId", updatable = false, unique = true, nullable = false)
+    @Column(name = "login_id", updatable = false, unique = true, nullable = false)
     private String loginId;
 
     @Column(name = "password", updatable = false, nullable = false)
@@ -37,7 +36,7 @@ public class Users implements UserDetails {
     private String nickname; //getNickname userNickname -> getUserNickname
 
     @Builder
-    public Users(String loginId, String password, String nickname, String auth){
+    public User(String loginId, String password, String nickname, String auth){
         this.loginId = loginId;
         this.password = password;
         this.nickname = nickname;
