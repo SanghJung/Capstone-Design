@@ -38,7 +38,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/login", "/signup", "/user").permitAll()
+                        .requestMatchers("/login", "/signup", "/user", "/kakao/save/place").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((formLogin) ->
                         formLogin.loginPage("/login")
