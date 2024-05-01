@@ -6,7 +6,6 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -17,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("activity")
 @SuperBuilder
-public class Activity extends Place{
+public class Activity extends Place {
     public static Activity createActivity(PlaceDto placeDto) {
         return Activity.builder()
                 .coord(new Coordinate(Double.parseDouble(placeDto.getX()), Double.parseDouble(placeDto.getY())))

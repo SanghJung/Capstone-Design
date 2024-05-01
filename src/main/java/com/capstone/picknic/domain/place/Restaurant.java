@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorValue("restaurant") // default is class name
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
-public class Restaurant extends Place{
+public class Restaurant extends Place {
 
     public static Restaurant createRestaurant(PlaceDto placeDto) {
         return Restaurant.builder()

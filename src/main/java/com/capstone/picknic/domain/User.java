@@ -1,11 +1,9 @@
 package com.capstone.picknic.domain;
 
 
+import com.capstone.picknic.dto.UserDto;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,32 +11,34 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "usertable")
+@Table(name = "user")
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+public class User implements UserDetails {
 
-public class Users implements UserDetails {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", updatable = false)
-    private Long user_id;
+    @Column(name = "login_id")
+    private String loginId;
 
-    @Column(name = "login_id", updatable = false)
-    private String login_id;
-
-    @Column(name = "password", updatable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "nickname", updatable = false)
-    private String nickname;
+    @Column(name = "nick_name")
+    private String nickName;
 
-    @Builder
-    public Users(String login_id, String password, String nickname, String auth){
-        this.login_id = login_id;
-        this.password = password;
-        this.nickname = nickname;
+//        @Builder
+//    public Users(String loginId, String password, String nickname, String auth){
+//        this.loginId = loginId;
+//        this.password = password;
+//        this.nickname = nickname;
+//    }
+    public static User createUser(UserDto userDto) {
+        return new User(userDto.getUserId(), userDto.getLoginId(), userDto.getPassword(), userDto.getNickName());
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,7 +52,7 @@ public class Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login_id;
+        return loginId;
     }
 
     @Override

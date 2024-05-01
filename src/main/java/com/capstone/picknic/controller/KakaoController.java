@@ -22,7 +22,6 @@ public class KakaoController {
     private final KakaoSearchApiService kakaoSearchApiService;
     private final int MAX_SIZE = 15;
 
-
     @GetMapping("/test")
     public List<PlaceDto> test(@ModelAttribute QueryDto queryDto) {
         log.info(kakaoSearchApiService.searchKakaoApi(queryDto).toString());
@@ -35,22 +34,5 @@ public class KakaoController {
         kakaoSearchApiService.saveKakaoApi(queryDto);
         return "saved";
     }
-//    @GetMapping("/save/restaurant")
-//    public void restaurantApiSave(@ModelAttribute QueryDto queryDto) {
-//        List<PlaceDto> placeDtos = kaoSearchApiService.searchKakaoApi(queryDto);
-//        log.info(placeDtos.toString());
-//        restaurantService.save(placeDtos);
-//    }
-//    @GetMapping("/save/cafe")
-//    public void cafeApiSave(@ModelAttribute QueryDto queryDto) {
-//        List<PlaceDto> placeDtos = kaoSearchApiService.searchKakaoApi(queryDto);
-//        log.info(placeDtos.toString());
-//        cafeService.save(placeDtos);
-//    }
-//    @GetMapping("/save/activity")
-//    public void activityApiSave(@ModelAttribute QueryDto queryDto) {
-//        List<PlaceDto> placeDtos = kaoSearchApiService.searchKakaoApi(queryDto);
-//        log.info(placeDtos.toString());
-//        activityService.save(placeDtos);
-//    }
+
 }

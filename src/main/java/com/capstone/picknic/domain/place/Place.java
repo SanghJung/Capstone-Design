@@ -1,10 +1,8 @@
 package com.capstone.picknic.domain.place;
 
 import com.capstone.picknic.domain.Detail;
-import com.capstone.picknic.domain.Member;
 import com.capstone.picknic.domain.Menu;
 import com.capstone.picknic.domain.RatingReview;
-import com.capstone.picknic.dto.PlaceDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -24,7 +22,7 @@ public class Place {
     @Column(name = "place_id")
     private Long id;
 
-    @Column(name = "place_name", nullable = false, length = 20)
+    @Column(name = "place_name", nullable = false)
     private String name;
 
     @Column(name = "place_address", nullable = false)
