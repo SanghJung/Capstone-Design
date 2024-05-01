@@ -1,6 +1,6 @@
 package com.capstone.picknic.config;
 
-import com.capstone.picknic.Service.UserService;
+import com.capstone.picknic.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
 public class SecurityConfig {
-    private final UserService userService;
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService)
