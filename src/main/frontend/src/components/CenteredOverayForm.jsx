@@ -1,11 +1,29 @@
 import {Container, Row, Button} from 'react-bootstrap'
 import {styled} from 'styled-components'
+import {Form} from 'react-bootstrap'
 import {OverlayWrapper} from './shared/OverlayWrapper'
 
-export const CenteredOverayForm = ({children}) => {
+export const CenteredOverayForm = ({number, title, children, handleSubmit, validated}) => {
   return (
     <StyledCenteralizedContainer>
-      <OverlayWrapper>{children}</OverlayWrapper>
+      <OverlayWrapper>
+        <Container>
+        <Form validated={validated} onSubmit={handleSubmit}>
+          <StyledRow>
+            <Row className='align-items-start'>
+              <StyledSection>{number}</StyledSection>
+              <StyledH1>{title}</StyledH1>
+            </Row>
+            <Row className='align-items-center'>
+              {children}
+            </Row>
+            <Row className='align-items-end'>
+              <StyledSubmitButton>다음</StyledSubmitButton>
+            </Row>
+          </StyledRow>
+        </Form>
+      </Container>
+      </OverlayWrapper>
     </StyledCenteralizedContainer>
   )
 }
@@ -22,13 +40,13 @@ const StyledCenteralizedContainer = styled(Container)`
   gap: 10px;
 `
 
-export const StyledRow = styled(Row)`
+const StyledRow = styled(Row)`
   height: 80vh;
   align-items: center;
   justify-content: center;
 `
 
-export const StyledSection = styled.section`
+const StyledSection = styled.section`
   border-radius: 100%;
   background-color: #295ff4;
   height: 5vw;
@@ -39,7 +57,7 @@ export const StyledSection = styled.section`
   margin: auto;
 `
 
-export const StyledH1 = styled.h1`
+const StyledH1 = styled.h1`
   padding: 30px;
   font-weight: 600;
   line-height: 50px;
@@ -51,18 +69,7 @@ export const StyledH1 = styled.h1`
   }
 `
 
-export const StyledH2 = styled.h2`
-  padding: 0px;
-  font-weight: 300;
-  line-height: 0px;
-  text-align: Center;
-  color: gray;
-  span {
-    color: #295ff4;
-  }
-`
-
-export const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
+const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
   width: 60%;
   height: 50px;
   margin: 0 auto;
@@ -79,11 +86,4 @@ export const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
     color: white;
     font-weight: 1000;
   }
-`
-
-export const StyledSubtitle = styled.p`
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  color: gray;
-  text-align: Center;
 `

@@ -1,12 +1,7 @@
-import {CenteredOverayForm} from './CenteredOverayForm'
-import {Container, Row} from 'react-bootstrap'
-import {
-  StyledSubmitButton,
-  StyledRow,
-  StyledSubtitle,
-} from './CenteredOverayForm'
+import {Container, Row, Button} from 'react-bootstrap'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
 import {styled} from 'styled-components'
+import {OverlayWrapper} from './shared/OverlayWrapper'
 
 function CircularProgress({progress}) {
   const circleLength = useTransform(progress, [0, 1], [0, 1])
@@ -48,7 +43,8 @@ function CircularProgress({progress}) {
 export const CreateCourseEnd = () => {
   let progress = useMotionValue(90)
   return (
-    <CenteredOverayForm>
+    <StyledCenteralizedContainer>
+      <OverlayWrapper>
       <Container>
         <StyledRow>
           <Row>
@@ -71,7 +67,8 @@ export const CreateCourseEnd = () => {
           </Row>
         </StyledRow>
       </Container>
-    </CenteredOverayForm>
+      </OverlayWrapper>
+    </StyledCenteralizedContainer>
   )
 }
 
@@ -84,5 +81,49 @@ const StyledH1 = styled.h1`
   overflow-wrap: break-word;
   span {
     color: #295ff4;
+  }
+`
+
+const StyledCenteralizedContainer = styled(Container)`
+  background-color: #fbf3f7;
+  width: 30vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-item: center;
+  padding: 0px;
+  gap: 10px;
+`
+
+const StyledRow = styled(Row)`
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+`
+
+const StyledSubtitle = styled.p`
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  color: gray;
+  text-align: Center;
+`
+
+const StyledSubmitButton = styled(Button).attrs({type: 'submit'})`
+  width: 60%;
+  height: 50px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 50px;
+  border-color: #295ff4;
+  border-width: 2px;
+  color: #295ff4;
+  font-weight: 600;
+  font-size: 18px;
+  &: hover {
+    background-color: #295ff4;
+    filter: brightness(90%);
+    color: white;
+    font-weight: 1000;
   }
 `
