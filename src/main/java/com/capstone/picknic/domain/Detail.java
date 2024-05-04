@@ -1,4 +1,4 @@
-/*package com.capstone.picknic.domain;
+package com.capstone.picknic.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,4 +27,3 @@ public class Detail {
         this.parkingYN = parkingYN;
     }
 }
-*/

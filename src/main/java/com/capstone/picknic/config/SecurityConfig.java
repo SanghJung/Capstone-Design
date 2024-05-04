@@ -1,5 +1,6 @@
 package com.capstone.picknic.config;
 
+
 import com.capstone.picknic.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +17,6 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
 public class SecurityConfig {
-
-
-
 
 
 

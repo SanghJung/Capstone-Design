@@ -1,11 +1,9 @@
 package com.capstone.picknic.domain;
 
 
+import com.capstone.picknic.dto.UserDto;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,13 +11,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+
 @Table(name = "user_table")
+
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-
-
 public class User implements UserDetails {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +38,15 @@ public class User implements UserDetails {
     private String nickname; //getNickname userNickname -> getUserNickname
 
     @Builder
-    public User(String loginId, String password, String nickname, String auth){
+    public User(String loginId, String password, String nickname, String auth) {
         this.loginId = loginId;
         this.password = password;
         this.nickname = nickname;
     }
+
+
+
+
     /*회원정보 변경*/
     public void updateNickname(String nickname){
         this.nickname = nickname;
