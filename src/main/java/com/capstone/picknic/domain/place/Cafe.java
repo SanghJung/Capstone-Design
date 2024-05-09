@@ -18,6 +18,8 @@ import lombok.experimental.SuperBuilder;
 
 public class Cafe extends Place {
 
+
+
     public static Cafe createCafe(PlaceDto placeDto) {
         return Cafe.builder()
                 .coord(new Coordinate(Double.parseDouble(placeDto.getX()), Double.parseDouble(placeDto.getY())))
@@ -29,3 +31,4 @@ public class Cafe extends Place {
                 .build();
     }
 }
+

@@ -16,6 +16,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("activity")
 @SuperBuilder
+
+
+
 public class Activity extends Place {
     public static Activity createActivity(PlaceDto placeDto) {
         return Activity.builder()
