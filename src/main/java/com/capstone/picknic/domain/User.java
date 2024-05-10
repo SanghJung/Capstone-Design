@@ -11,38 +11,54 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "user")
+
+@Table(name = "user_table")
+
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class User implements UserDetails {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", updatable = false, nullable = false)
     private Long userId;
 
-    @Column(name = "login_id")
+    @Column(name = "login_id", updatable = false, unique = true, nullable = false)
     private String loginId;
 
-    @Column(name = "password")
+    @Column(name = "password", updatable = false, nullable = false)
     private String password;
 
-    @Column(name = "nick_name")
-    private String nickName;
+    @Column(name = "nickname", updatable = false, unique = true, nullable = false)
+    private String nickname; //getNickname userNickname -> getUserNickname
 
-//        @Builder
-//    public Users(String loginId, String password, String nickname, String auth){
-//        this.loginId = loginId;
-//        this.password = password;
-//        this.nickname = nickname;
-//    }
-    public static User createUser(UserDto userDto) {
-        return new User(userDto.getUserId(), userDto.getLoginId(), userDto.getPassword(), userDto.getNickName());
+    @Builder
+    public User(String loginId, String password, String nickname, String auth) {
+        this.loginId = loginId;
+        this.password = password;
+        this.nickname = nickname;
     }
+
+
+
+
+    /*회원정보 변경*/
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
+    public  void updatePassword(String password){
+        this.password = password;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("user"));
+        return List.of(new SimpleGrantedAuthority("users"));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.capstone.picknic.config;
 
+
 import com.capstone.picknic.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
 public class SecurityConfig {
 
+
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService)
             throws Exception{
@@ -28,14 +31,17 @@ public class SecurityConfig {
 
     }
 
+
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        return http.authorizeHttpRequests((authz) -> authz
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/login", "/signup", "/user").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin((formLogin) ->
@@ -47,6 +53,5 @@ public class SecurityConfig {
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
-
     }
 }
