@@ -18,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
 public class SecurityConfig {
 
-
-
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService)
             throws Exception{
@@ -31,26 +29,14 @@ public class SecurityConfig {
 
     }
 
-
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
-                        .requestMatchers("/login", "/signup", "/user").permitAll()
-                        .anyRequest().authenticated()
-                ).formLogin((formLogin) ->
-                        formLogin.loginPage("/login")
-                                .defaultSuccessUrl("/articles")
-                ).logout((logout) ->
-                        logout.logoutSuccessUrl("/login")
-                                .invalidateHttpSession(true)
-                )
+        return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }

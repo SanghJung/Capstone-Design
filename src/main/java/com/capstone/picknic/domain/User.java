@@ -45,6 +45,9 @@ public class User implements UserDetails {
     }
 
 
+    public Boolean checkDuplicatedPassword(String password) {
+        return this.password.equals(password);
+    }
 
 
     /*회원정보 변경*/
