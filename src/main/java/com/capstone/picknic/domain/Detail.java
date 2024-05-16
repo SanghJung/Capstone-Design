@@ -13,17 +13,23 @@ public class Detail {
     @Column(name = "detail_id")
     private Long id;
 
+    @Column(length = 500)
     private String introduction;
 
+    @Column(length = 500)
     private String service;
 
+    @Column(name = "place_time", length = 500)
+    private String placeTime;
+
     @Column(name = "parking_yn")
-    private boolean parkingYN;
+    private String parkingYN;
 
     @Builder
-    public Detail(String introduction, String service, boolean parkingYN){
+    public Detail(String introduction, String service, String parkingYN, String placeTime){
         this.introduction = introduction;
         this.service = service;
         this.parkingYN = parkingYN;
+        this.placeTime = placeTime;
     }
 }

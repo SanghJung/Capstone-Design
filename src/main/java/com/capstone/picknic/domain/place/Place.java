@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,19 +43,24 @@ public class Place {
     private String phoneNumber;
 
     //thumbnail 설정 유무
+    @Setter
     @Column(name = "thumbnail_url")
     private String thumbnailUrl;
 
+    //연관관계 메서드
+    @Setter
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
     @JoinColumn(name = "rating_review_id")
     private RatingReview ratingReview;
 
+    @Setter
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
     @JoinColumn(name = "detail_id")
     private Detail detail;
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL) // mappedBy는 연관관계에서 주인이 아닌 엔티티에서 수정을 불가하게 하는것
-    private List<Menu> menus;                                 // cascade는 부모의 객체가 영속화,삭제 될때 자식객체도 같이
+    private List<Menu> menus = new ArrayList<>();
+
 
 }
 

@@ -21,13 +21,11 @@ public class KakaoController {
 
     private final KakaoSearchApiService kakaoSearchApiService;
     private final int MAX_SIZE = 15;
-
     @GetMapping("/test")
     public List<PlaceDto> test(@ModelAttribute QueryDto queryDto) {
         log.info(kakaoSearchApiService.searchKakaoApi(queryDto).toString());
         return kakaoSearchApiService.searchKakaoApi(queryDto);
     }
-
     @GetMapping("/save/place")
     public String placeApiSave(@RequestParam String query, @RequestParam String code) {
         QueryDto queryDto = new QueryDto(query, code, 1, MAX_SIZE);
