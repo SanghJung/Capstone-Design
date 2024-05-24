@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "bootstrap5-tags": "^1.7.1",
     "framer-motion": "^11.1.7",
