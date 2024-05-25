@@ -117,16 +117,16 @@ export const CourseFinal = () => {
   }
 
   const categoryMap = {
-    음식점: 'Play.png',
-    놀거리: 'Eat.png',
+    음식점: 'Eat.png',
+    놀거리: 'Play.png',
     마실거리: 'Cafe.png',
     힐링: 'Rest.png',
     기타: 'Play.png',
   }
 
   const categoryComponentMap = {
-    음식점: {Component: Play, color: '#64C466'},
-    놀거리: {Component: Eat, color: '#010101'},
+    음식점: {Component: Eat, color: '#64C466'},
+    놀거리: {Component: Play, color: '#010101'},
     마실거리: {Component: Cafe, color: '#C39D74'},
     힐링: {Component: Rest, color: '#A1E4BD'},
     기타: {Component: Play, color: '#64C466'},
