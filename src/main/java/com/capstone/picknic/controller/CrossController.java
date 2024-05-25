@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:3000/coursefinal")  //corsefinal에서만 오는 요청 허용, 모든 요청 허용 필요시 origin = "*" 사용
+@CrossOrigin(origins = "*")  //corsefinal에서만 오는 요청 허용, 모든 요청 허용 필요시 origin = "*" 사용
 @RestController
-@RequestMapping("/api/place") //모든 엔드포인트 url 경로
+@RequestMapping("/api") //모든 엔드포인트 url 경로
 public class CrossController {
 
     @Autowired
@@ -33,29 +33,29 @@ public class CrossController {
 
 
     // ~~Repository.findAll() 메서드를 통해 DB 속 정보들 가져와서 List<> 형태로 반환
-    @GetMapping
+  /*@GetMapping
     public List<Place> getPlace(){
         return placeRepository.findAll();
-    }
+    }*/
 
-    @GetMapping
-    public List<Activity> getActivity(){
+    @GetMapping("/activities")
+    public List<Activity> getAllActivity(){
         return activityRepository.findAll();
     }
 
-    @GetMapping
-    public List<Restaurant> getRestaurant(){
+    @GetMapping("/restaurants")
+    public List<Restaurant> getAllRestaurant(){
         return restaurantRepository.findAll();
     }
 
-    @GetMapping
-    public List<Cafe> getCafe(){
+    @GetMapping("/cafes")
+    public List<Cafe> getAllCafe(){
         return cafeRepository.findAll();
     }
 
     //특정 ~~_id를 가진 정보 조회
 
-    @GetMapping("coursefinal/{id}")   // pii/place/"coursefinal/{id}
+    @GetMapping("/activities/{id}")   // pii/place/"coursefinal/{id}
     public ResponseEntity<Activity> getActivityById(@PathVariable Long id){
         return activityRepository.findById(id) //데이터베이스 속 Place_id 정보 찾기
                 .map(ResponseEntity::ok)// 정보 O -> ResponseEntity 객체 생성, HTTP 코드 200(OK)와 정보를 응답 본문에 포함
@@ -63,16 +63,16 @@ public class CrossController {
 
     }
 
-    @GetMapping("coursefinal/{id}")
-    public ResponseEntity<Restaurant> getRestaruantByPlace_Id(@PathVariable Long id){
+    @GetMapping("/restaurants/{id}")
+    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long id){
         return restaurantRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
 
     }
 
-    @GetMapping("coursefinal/{id}")
-    public ResponseEntity<Cafe> getCafeByPlace_Id(@PathVariable Long id){
+    @GetMapping("/cafes/{id}")
+    public ResponseEntity<Cafe> getCafeById(@PathVariable Long id){
         return cafeRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
