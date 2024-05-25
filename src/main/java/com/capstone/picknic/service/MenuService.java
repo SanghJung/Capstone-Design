@@ -13,6 +13,11 @@ public class MenuService {
     private final MenuRepository menuRepository;
 
     public void save(MenuDto menuDto) {
+        if(existsByName(menuDto.getName())) return;
         menuRepository.save(menuDto.toEntity());
+    }
+
+    public boolean existsByName(String name) {
+        return menuRepository.existsByName(name);
     }
 }

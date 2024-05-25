@@ -7,6 +7,7 @@ import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.dto.CrawlingDto;
 import com.capstone.picknic.dto.MenuDto;
 import com.capstone.picknic.dto.place.request.PlaceNameRequestDto;
+import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.MenuRepository;
 import com.capstone.picknic.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,10 @@ public class PlaceService {
         return placeRepository.findOneByName(placeNameRequestDto.getName());
     }
 
+    public List<PlaceNameUrlDto> allNameWithUrl() {
+        return placeRepository.findAll().stream().map(place -> new PlaceNameUrlDto(place.getName(), place.getUrl()))
+                .collect(Collectors.toList());
+    }
     @Transactional
     public Place Update(CrawlingDto crawlingDto) {
 
@@ -44,8 +49,8 @@ public class PlaceService {
         place.setThumbnailUrl(crawlingDto.getPlaceThumb());
 
         place.setDetail(Detail.builder()
-                .introduction(crawlingDto.getPlaceIntroduction())
-                .parkingYN(crawlingDto.getPlaceParkingYn())
+                .placeHomepageUrl(crawlingDto.getPlaceHomepageUrl())
+                .placeFacility(crawlingDto.getPlaceFacility())
                 .placeTime(crawlingDto.getPlaceTime())
                 .service(crawlingDto.getPlaceService())
                 .build());

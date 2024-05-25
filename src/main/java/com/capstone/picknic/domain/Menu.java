@@ -19,7 +19,7 @@ public class Menu {
 
     private String price;
 
-    @Column(name = "img_url")
+    @Column(name = "img_url", length = 500)
     private String imgUrl;
 
     //연관관계 메서드

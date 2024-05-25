@@ -7,6 +7,7 @@ import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.dto.CrawlingDto;
 import com.capstone.picknic.dto.MenuDto;
 import com.capstone.picknic.dto.place.request.PlaceNameRequestDto;
+import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.MenuRepository;
 import com.capstone.picknic.service.MenuService;
 import com.capstone.picknic.service.PlaceService;
@@ -31,10 +32,10 @@ public class PlaceController {
         List<Place> places = placeService.findAll();
         return ResponseEntity.ok(places);
     }
-    @PostMapping("/v1/places/name")
-    public ResponseEntity<List<String>> getAllPlaceName() {
-        List<String> placeNameList = placeService.allPlaceName();
-        return ResponseEntity.ok(placeNameList);
+    @PostMapping("/v1/places/names-urls")
+    public ResponseEntity<List<PlaceNameUrlDto>> getAllPlaceNamesAndUrls() {
+        List<PlaceNameUrlDto> PlaceNameUrlDtos = placeService.allNameWithUrl();
+        return ResponseEntity.ok(PlaceNameUrlDtos);
     }
     @PostMapping("/v1/places/crawling")
     public ResponseEntity<CrawlingDto> saveCrawlingData(@RequestBody CrawlingDto crawlingDto) {

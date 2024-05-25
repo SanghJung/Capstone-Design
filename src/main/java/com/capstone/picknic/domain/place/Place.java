@@ -44,7 +44,7 @@ public class Place {
 
     //thumbnail 설정 유무
     @Setter
-    @Column(name = "thumbnail_url")
+    @Column(name = "thumbnail_url", length = 500)
     private String thumbnailUrl;
 
     //연관관계 메서드

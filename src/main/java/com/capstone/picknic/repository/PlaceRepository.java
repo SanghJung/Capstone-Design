@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
     boolean existsByName(String name);
-
     Place findOneByName(String name);
 }

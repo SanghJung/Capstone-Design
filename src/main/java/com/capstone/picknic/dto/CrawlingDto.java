@@ -30,11 +30,11 @@ public class CrawlingDto {
     @JsonProperty("place_thumb")
     private String placeThumb;
 
-    @JsonProperty("place_introduction")
-    private String placeIntroduction;
+    @JsonProperty("place_facility")
+    private String placeFacility;
 
-    @JsonProperty("place_parking_yn")
-    private String placeParkingYn;
+    @JsonProperty("place_homepage_url")
+    private String placeHomepageUrl;
 
     @JsonProperty("place_time")
     private String placeTime;
