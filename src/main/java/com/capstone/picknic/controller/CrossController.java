@@ -55,7 +55,7 @@ public class CrossController {
 
     //특정 ~~_id를 가진 정보 조회
 
-    @GetMapping("coursefinal/{id}")
+    @GetMapping("coursefinal/{id}")   // pii/place/"coursefinal/{id}
     public ResponseEntity<Activity> getActivityById(@PathVariable Long id){
         return activityRepository.findById(id) //데이터베이스 속 Place_id 정보 찾기
                 .map(ResponseEntity::ok)// 정보 O -> ResponseEntity 객체 생성, HTTP 코드 200(OK)와 정보를 응답 본문에 포함
@@ -112,6 +112,7 @@ public class CrossController {
         if (!places) return null;
 
 // html부분 추가 - 윤지님이 짜둔 코드 추가하면 될 듯
+
 
    다른 방법
         axios.get('/api/stores') // 스프링 부트 엔드포인트 URL
