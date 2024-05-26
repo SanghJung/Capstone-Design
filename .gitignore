@@ -37,4 +37,5 @@ out/
 .vscode/
 
 ### Ignore the application-MYSQL.yml file ###
-application-MYSQL.yml
+!**/src/main/resourse/application-MYSQL.yml
+!**/src/main/resourse/application-API-KEY.yml
