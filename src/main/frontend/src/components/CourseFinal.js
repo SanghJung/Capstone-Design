@@ -11,7 +11,7 @@ import {Play} from './shared/svg/play'
 import {Cafe} from './shared/svg/cafe'
 import {Eat} from './shared/svg/eat'
 import {Rest} from './shared/svg/rest'
-// import axios from 'axios'
+import axios from 'axios'
 
 export const CourseFinal = () => {
   const [places, setPlaces] = useState([])
@@ -29,59 +29,17 @@ export const CourseFinal = () => {
   useEffect(() => {
     const fetchPlacesData = async () => {
       try {
-        // var response = await axios.get('/place')
-        var response = {
-          places: [
-            '청춘부추소곱창',
-            '리듬게임랜드',
-            '메가커피',
-            '휴양림산책로',
-          ],
-          categories: ['음식점', '놀거리', '마실거리', '힐링'],
-          index: ['음식점 > 한식', '오락', '음식점 > 카페', '오락 > 힐링'],
-          positions: [
-            {lat: 33.55635, lng: 126.795841},
-            {lat: 33.5, lng: 126.795841},
-            {lat: 33.4, lng: 126.7},
-            {lat: 33.4, lng: 126.6},
-          ],
-          addresses: [
-            '서울특별시 강남구 언주로 408',
-            '서울특별시 송파구 오금로 36길',
-            '서울특별시 강동구 천중로 43길',
-            '서울특별시 강서구 강서로 211',
-          ],
-          phoneNumber: [
-            '02-123-1131',
-            '02-123-4567',
-            '02-567-8901',
-            '02-390-2391',
-          ],
-          placeUrl: [
-            'www.naver.com/1',
-            'www.naver.com/2',
-            'www.naver.com/3',
-            'www.naver.com/4',
-          ],
-        }
-        const {
-          places,
-          categories,
-          positions,
-          index,
-          addresses,
-          phoneNumber,
-          placeUrl,
-        } = response
-        // const data = response.data
+        var response = await axios.get('http://localhost:8080/api/place')
 
-        const initialPlaces = places
-        const initialCategories = categories
-        const initialPositions = positions
-        const initialAddresses = addresses
-        const initialIndex = index
-        const initialPhoneNumber = phoneNumber
-        const initialPlaceUrl = placeUrl
+        const data = response.data
+
+        const initialPlaces = data.places
+        const initialCategories = data.categories
+        const initialPositions = data.positions
+        const initialAddresses = data.addresses
+        const initialIndex = data.index
+        const initialPhoneNumber = data.phoneNumber
+        const initialPlaceUrl = data.placeUrl
 
         setPlaces(initialPlaces)
         setCategories(initialCategories)
