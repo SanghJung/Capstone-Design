@@ -1,5 +1,5 @@
 export const ROUTES = {
-  GENERATE_COURSE: '/coursefirst',
+  //GENERATE_COURSE: '/coursefirst',
   COURSE_FINAL: '/coursefinal',
   CREATE_COURSE_NAME: '/course/1',
   ADD_VISIT_PURPOSE: '/course/2',

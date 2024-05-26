@@ -239,3 +239,14 @@ const StyledCol2 = styled(Col)`
   text-align: center;
   padding-left: 25px;
 `
+
+
+
+
+
+
+
+
+
+
+
