@@ -1,23 +1,21 @@
 spring:
 
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/user_table
-    username: root
-    password: 3050
-
-
   profiles:
     include: API-KEY, MYSQL
-
 
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: update # 자동 생성
     properties:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
+    
+ logging:
+  level:
+    org.hibernate:
+      SQL: debug  # Log level로 쿼리 보기
+      type: trace # 쿼리에(?,?,?) 값의 상세 값 

@@ -6,11 +6,10 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 public class UserUpdateDto {
-
-    @NotBlank
+    @NotBlank()
     private String loginId;
 
-    @NotBlank
+    @NotBlank()
     private String password;
 
     private String newPassword;

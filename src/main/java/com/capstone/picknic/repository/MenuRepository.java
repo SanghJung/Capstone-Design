@@ -1,13 +1,10 @@
 package com.capstone.picknic.repository;
 
-import com.capstone.picknic.domain.place.Place;
+import com.capstone.picknic.domain.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface PlaceRepository extends JpaRepository<Place, Long> {
+public interface MenuRepository extends JpaRepository<Menu, Long> {
     boolean existsByName(String name);
-    Place findOneByName(String name);
 }
