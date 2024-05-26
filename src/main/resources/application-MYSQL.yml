@@ -1,6 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/tmpDB?serverTimezone=Asia/Seoul
-    username: root
-    password: 5757anaN@@
-    driver-class-name: com.mysql.cj.jdbc.Driver

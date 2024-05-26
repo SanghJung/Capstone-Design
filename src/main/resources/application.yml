@@ -1,17 +1,21 @@
 spring:
+
   profiles:
     include: API-KEY, MYSQL
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
     hibernate:
       ddl-auto: update # 자동 생성
     properties:
       hibernate:
-        format_sql: true # DB로 날리는 쿼리를 보기쉽게함
-
-logging:
+        format_sql: true
+    defer-datasource-initialization: true
+    
+ logging:
   level:
     org.hibernate:
       SQL: debug  # Log level로 쿼리 보기
-      type: trace # 쿼리에(?,?,?) 값의 상세 값 보기
+      type: trace # 쿼리에(?,?,?) 값의 상세 값 
