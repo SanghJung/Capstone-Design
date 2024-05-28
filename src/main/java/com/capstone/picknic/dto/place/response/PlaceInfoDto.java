@@ -6,20 +6,21 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.management.DescriptorAccess;
+import java.util.List;
 
 @Getter
 public class PlaceInfoDto {
     private String phoneNumber;
     private String url;
-    private Menu menu;
+    private List<Menu> menus;
     private Detail detail;
 
 
     @Builder
-    public PlaceInfoDto(String phoneNumber, String url, Menu menu, Detail detail) {
+    public PlaceInfoDto(String phoneNumber, String url, List<Menu> menus, Detail detail) {
         this.phoneNumber = phoneNumber;
         this.url = url;
-        this.menu = menu;
+        this.menus = menus;
         this.detail = detail;
     }
 }

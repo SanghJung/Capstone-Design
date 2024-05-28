@@ -61,13 +61,14 @@ public class PlaceService {
                 .collect(Collectors.toList());
     }
 
-    public List<PlaceInfoDto> PlaceInfo(Long id) {
+    public List<PlaceInfoDto> findPlaceInfo(Long id) {
         return placeRepository.findById(id).stream().map(place -> PlaceInfoDto.builder()
                 .phoneNumber(place.getPhoneNumber())
                 .url(place.getUrl())
-                .menu()
+                .menus(place.getMenus())
                 .detail(place.getDetail())
-        )
+                .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional

@@ -5,6 +5,7 @@ import com.capstone.picknic.domain.place.Cafe;
 import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.domain.place.Restaurant;
 import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
+import com.capstone.picknic.dto.place.response.PlaceInfoDto;
 import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.ActivityRepository;
 import com.capstone.picknic.repository.CafeRepository;
@@ -95,6 +96,12 @@ public class CrossController {
         return ResponseEntity.ok(placeDetailsDtoList);
     }
 
+    @PostMapping("/info")
+    public ResponseEntity<List<PlaceInfoDto>> getPlaceInfo(@RequestBody Long id) {
+
+        List<PlaceInfoDto> placeInfoDtoList = placeService.findPlaceInfo(id);
+        return ResponseEntity.ok(placeInfoDtoList);
+    }
     /*
     import React, { useState, useEffect } from 'react';
     import axios from 'axios';
