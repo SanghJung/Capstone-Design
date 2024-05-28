@@ -42,5 +42,4 @@ public class PlaceController {
         Place place = placeService.Update(crawlingDto);
         return ResponseEntity.ok(crawlingDto);
     }
-
  }

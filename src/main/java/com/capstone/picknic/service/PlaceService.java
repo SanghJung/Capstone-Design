@@ -7,9 +7,11 @@ import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.dto.CrawlingDto;
 import com.capstone.picknic.dto.MenuDto;
 import com.capstone.picknic.dto.place.request.PlaceNameRequestDto;
+import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
 import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.MenuRepository;
 import com.capstone.picknic.repository.PlaceRepository;
+import jakarta.persistence.DiscriminatorValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +43,23 @@ public class PlaceService {
         return placeRepository.findAll().stream().map(place -> new PlaceNameUrlDto(place.getName(), place.getUrl()))
                 .collect(Collectors.toList());
     }
+
+
+    //
+    public List<PlaceDetailsDto> allPlaceDetails() {
+        return placeRepository.findAll().stream().map(place -> PlaceDetailsDto.builder()
+                        .ratingReview(place.getRatingReview())
+                        .id(place.getId())
+                        .categoryName(place.getCategoryName())
+                        .coord(place.getCoord())
+                        .address(place.getAddress())
+                        .thumbnailUrl(place.getThumbnailUrl())
+                        .name(place.getName())
+                        .placeType(place.getClass().getAnnotation(DiscriminatorValue.class).value())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public Place Update(CrawlingDto crawlingDto) {
 
@@ -69,4 +88,6 @@ public class PlaceService {
 
         return place;
     }
+
+
 }
