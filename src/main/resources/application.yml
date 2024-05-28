@@ -7,7 +7,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
-      ddl-auto: create # 자동 생성
+      ddl-auto: update # 자동 생성
     properties:
       hibernate:
         format_sql: true

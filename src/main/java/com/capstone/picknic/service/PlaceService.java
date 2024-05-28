@@ -8,6 +8,7 @@ import com.capstone.picknic.dto.CrawlingDto;
 import com.capstone.picknic.dto.MenuDto;
 import com.capstone.picknic.dto.place.request.PlaceNameRequestDto;
 import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
+import com.capstone.picknic.dto.place.response.PlaceInfoDto;
 import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.MenuRepository;
 import com.capstone.picknic.repository.PlaceRepository;
@@ -58,6 +59,15 @@ public class PlaceService {
                         .placeType(place.getClass().getAnnotation(DiscriminatorValue.class).value())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public List<PlaceInfoDto> PlaceInfo(Long id) {
+        return placeRepository.findById(id).stream().map(place -> PlaceInfoDto.builder()
+                .phoneNumber(place.getPhoneNumber())
+                .url(place.getUrl())
+                .menu()
+                .detail(place.getDetail())
+        )
     }
 
     @Transactional

@@ -2,7 +2,6 @@ package com.capstone.picknic.dto.place.response;
 
 import com.capstone.picknic.domain.RatingReview;
 import com.capstone.picknic.domain.place.Coordinate;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 

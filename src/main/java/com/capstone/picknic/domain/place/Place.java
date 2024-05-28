@@ -49,12 +49,12 @@ public class Place {
 
     //연관관계 메서드
     @Setter
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
     @JoinColumn(name = "rating_review_id")
     private RatingReview ratingReview;
 
     @Setter
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // fetch = FetchType.LAZY는 지연로딩 전략으로 default 즉시로딩(EAGER)
     @JoinColumn(name = "detail_id")
     private Detail detail;
 
