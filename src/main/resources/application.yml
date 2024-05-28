@@ -1,5 +1,4 @@
 spring:
-
   profiles:
     include: API-KEY, MYSQL
 
@@ -14,7 +13,7 @@ spring:
         format_sql: true
     defer-datasource-initialization: true
     
- logging:
+logging:
   level:
     org.hibernate:
       SQL: debug  # Log level로 쿼리 보기

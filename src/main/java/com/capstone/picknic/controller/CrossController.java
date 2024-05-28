@@ -2,24 +2,31 @@ package com.capstone.picknic.controller;
 
 import com.capstone.picknic.domain.place.Activity;
 import com.capstone.picknic.domain.place.Cafe;
-import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.domain.place.Restaurant;
+import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
+import com.capstone.picknic.dto.place.response.PlaceInfoDto;
 import com.capstone.picknic.repository.ActivityRepository;
 import com.capstone.picknic.repository.CafeRepository;
 import com.capstone.picknic.repository.PlaceRepository;
 
 
 import com.capstone.picknic.repository.RestaurantRepository;
+import com.capstone.picknic.service.PlaceService;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin(origins = "*")  //corsefinal에서만 오는 요청 허용, 모든 요청 허용 필요시 origin = "*" 사용
 @RestController
 @RequestMapping("/api") //모든 엔드포인트 url 경로
+@RequiredArgsConstructor
+
 public class CrossController {
 
     @Autowired
@@ -30,6 +37,9 @@ public class CrossController {
     private CafeRepository cafeRepository;
     @Autowired
     private RestaurantRepository restaurantRepository;
+
+    private final PlaceService placeService;
+
 
 
     // ~~Repository.findAll() 메서드를 통해 DB 속 정보들 가져와서 List<> 형태로 반환
@@ -79,7 +89,21 @@ public class CrossController {
 
     }
 
+    @PostMapping("/place")
+    public ResponseEntity<List<PlaceDetailsDto>> getPlaceDetails() {
+        List<PlaceDetailsDto> placeDetailsDtoList = placeService.allPlaceDetails();
+        return ResponseEntity.ok(placeDetailsDtoList);
+    }
 
+    @Data
+    public static class Dto {
+        Long id;
+    }
+    @PostMapping("/info")
+    public ResponseEntity<Optional<PlaceInfoDto>> getPlaceInfo(@RequestBody Dto dto) {
+        Optional<PlaceInfoDto> placeInfoDto = placeService.findPlaceInfo(dto.getId());
+        return ResponseEntity.ok(placeInfoDto);
+    }
     /*
     import React, { useState, useEffect } from 'react';
     import axios from 'axios';

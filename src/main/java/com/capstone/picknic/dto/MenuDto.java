@@ -3,10 +3,7 @@ package com.capstone.picknic.dto;
 
 import com.capstone.picknic.domain.Menu;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -28,5 +25,12 @@ public class MenuDto {
                 .name(this.name)
                 .price(this.price)
                 .build();
+    }
+
+    @Builder
+    public MenuDto(String name, String price, String thumb) {
+        this.name = name;
+        this.price = price;
+        this.thumb = thumb;
     }
 }
