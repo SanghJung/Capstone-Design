@@ -2,11 +2,9 @@ package com.capstone.picknic.controller;
 
 import com.capstone.picknic.domain.place.Activity;
 import com.capstone.picknic.domain.place.Cafe;
-import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.domain.place.Restaurant;
 import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
 import com.capstone.picknic.dto.place.response.PlaceInfoDto;
-import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.ActivityRepository;
 import com.capstone.picknic.repository.CafeRepository;
 import com.capstone.picknic.repository.PlaceRepository;
@@ -14,13 +12,14 @@ import com.capstone.picknic.repository.PlaceRepository;
 
 import com.capstone.picknic.repository.RestaurantRepository;
 import com.capstone.picknic.service.PlaceService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin(origins = "*")  //corsefinal에서만 오는 요청 허용, 모든 요청 허용 필요시 origin = "*" 사용
@@ -96,11 +95,14 @@ public class CrossController {
         return ResponseEntity.ok(placeDetailsDtoList);
     }
 
+    @Data
+    public static class Dto {
+        Long id;
+    }
     @PostMapping("/info")
-    public ResponseEntity<List<PlaceInfoDto>> getPlaceInfo(@RequestBody Long id) {
-
-        List<PlaceInfoDto> placeInfoDtoList = placeService.findPlaceInfo(id);
-        return ResponseEntity.ok(placeInfoDtoList);
+    public ResponseEntity<Optional<PlaceInfoDto>> getPlaceInfo(@RequestBody Dto dto) {
+        Optional<PlaceInfoDto> placeInfoDto = placeService.findPlaceInfo(dto.getId());
+        return ResponseEntity.ok(placeInfoDto);
     }
     /*
     import React, { useState, useEffect } from 'react';

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,14 +62,17 @@ public class PlaceService {
                 .collect(Collectors.toList());
     }
 
-    public List<PlaceInfoDto> findPlaceInfo(Long id) {
-        return placeRepository.findById(id).stream().map(place -> PlaceInfoDto.builder()
+    public Optional<PlaceInfoDto> findPlaceInfo(Long id) {
+        return placeRepository.findById(id).map(place -> PlaceInfoDto.builder()
                 .phoneNumber(place.getPhoneNumber())
                 .url(place.getUrl())
-                .menus(place.getMenus())
+                .menus(place.getMenus().stream().map(menu -> MenuDto.builder()
+                        .thumb(menu.getImgUrl())
+                        .price(menu.getPrice())
+                        .name(menu.getName())
+                        .build()).collect(Collectors.toList()))
                 .detail(place.getDetail())
-                .build())
-                .collect(Collectors.toList());
+                .build());
     }
 
     @Transactional

@@ -2,6 +2,7 @@ package com.capstone.picknic.dto.place.response;
 
 import com.capstone.picknic.domain.Detail;
 import com.capstone.picknic.domain.Menu;
+import com.capstone.picknic.dto.MenuDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,12 +13,12 @@ import java.util.List;
 public class PlaceInfoDto {
     private String phoneNumber;
     private String url;
-    private List<Menu> menus;
+    private List<MenuDto> menus;
     private Detail detail;
 
 
     @Builder
-    public PlaceInfoDto(String phoneNumber, String url, List<Menu> menus, Detail detail) {
+    public PlaceInfoDto(String phoneNumber, String url, List<MenuDto> menus, Detail detail) {
         this.phoneNumber = phoneNumber;
         this.url = url;
         this.menus = menus;
