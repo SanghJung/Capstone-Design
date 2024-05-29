@@ -31,7 +31,6 @@ public class UserApiController {
     }
 */
 
-
     @GetMapping("/login")
     public String login(){
         return "login";
