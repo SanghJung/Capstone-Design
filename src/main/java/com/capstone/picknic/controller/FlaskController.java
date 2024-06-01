@@ -1,6 +1,8 @@
 package com.capstone.picknic.controller;
 
 import com.capstone.picknic.domain.place.Place;
+import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +17,7 @@ import com.capstone.picknic.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-
+import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,48 +30,46 @@ public class FlaskController {
 }
 
 
+@RequiredArgsConstructor
 @RestController
-class GptController{
-    @Autowired
-    private PlaceService placeService;
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final String flaskServerUrl = "http://127.0.0.1:5000/get-course";
-    private final String flaskServerUrlWithPlace = "http://127.0.0.1:5000/get-course-with-place";
-    @GetMapping("/api/unchosen")
-    public String fetchCourse(@RequestParam(value = "question", defaultValue = "추천 기준은 평점, 방문자 리뷰수, 블로그 리뷰수를 참고해서 너가 알아서 추천해줘. 첫번째로 activities 중에서 장소 1개를 추천해줘. 두번째로 앞에서 추천한 장소 반경 2km 이내에 있는 restaurant, cafe 중에서 restaurant 2개, Cafe 1개를 추천해줘. 마지막으로 추천한 4개의 장소를 restaurant, cafe, activity, restaurant 순으로 출력해줘.") String question){
-        ResponseEntity<String> response = restTemplate.getForEntity(flaskServerUrl + "?question=" + question, String.class);
+@RequestMapping("/api")
+class GptController {
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return response.getBody();
-        } else {
-            return "Failed to get date course. HTTP Status Code: " + response.getStatusCode();
-        }
+    private final PlaceService placeService;
+
+    @PostMapping("/unchosen") // 엔드포인트 변경
+    public String unChosenPlace() { // @RequestBody 제거
+
+        // Flask 서버 URL 설정
+        String flaskServerUrl = "http://localhost:5000/unchosen"; // 엔드포인트 변경
+
+        // RestTemplate을 사용하여 Flask 서버에 POST 요청 보내기
+        RestTemplate restTemplate = new RestTemplate();
+        String response = restTemplate.postForObject(flaskServerUrl, null, String.class);
+
+        return response;
+
     }
 
-    @PostMapping("/api/chosen")
-    public String fetchCourseWithPlace(@RequestParam Long id) {
-        Place place = placeService.getPlaceById(id);
+    @PostMapping("/chosen/{id}")
+    public ResponseEntity<?> chosenPlace(@PathVariable Long id) {
 
-        if (place == null) {
-            return "Place not found";
+        String ChosenFlaskServerUrl = "http://localhost:5000/chosen";
+
+        PlaceDetailsDto placeDetailsDto = placeService.getPlaceDetailsById(id);
+        if (placeDetailsDto == null) {
+            return ResponseEntity.badRequest().body("존재하지 않는 장소입니다.");
         }
 
-        Map<String, String> payload = new HashMap<>();
-        payload.put("id", place.getId().toString());
-        //payload.put("place_type", place.());
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, Object> requestPayload = new HashMap<>();
+        requestPayload.put("id", placeDetailsDto.getId());
+        requestPayload.put("place_type", placeDetailsDto.getPlace_type());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        String choResponse = restTemplate.postForObject(ChosenFlaskServerUrl, requestPayload, String.class);
 
-        HttpEntity<Map<String, String>> request = new HttpEntity<>(payload, headers);
-
-        ResponseEntity<String> response = restTemplate.postForEntity(flaskServerUrlWithPlace, request, String.class);
-
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return response.getBody();
-        } else {
-            return "Failed to get course. HTTP Status Code: " + response.getStatusCode();
-        }
+        return ResponseEntity.ok(choResponse);
     }
+
 
 }

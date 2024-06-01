@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByLoginId(String loginId); //login_id 으로 사용자 정보 가져오기
-
 }

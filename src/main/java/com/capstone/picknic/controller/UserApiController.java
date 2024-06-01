@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserApiController {
     private final UserService userService;
 
-
     @PostMapping("/user") //회원가입 시 다시 로그인 페이지로 넘어가는 컨트롤러
     public String signup(UserDto request){
         userService.save(request);

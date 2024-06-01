@@ -6,21 +6,25 @@ import com.capstone.picknic.repository.ActivityRepository;
 import com.capstone.picknic.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ActivityService {
     private final ActivityRepository activityRepository;
     private final PlaceRepository placeRepository;
 
+    @Transactional
     public void save(PlaceDto placeDto) {
         if(checkDuplicatesByName(placeDto.getPlaceName()))return;
         Activity activity = Activity.createActivity(placeDto);
         activityRepository.save(activity);
     }
 
+    @Transactional
     public void save(List<PlaceDto> placeDtoList) {
         for(PlaceDto placeDto : placeDtoList) {
             save(placeDto);

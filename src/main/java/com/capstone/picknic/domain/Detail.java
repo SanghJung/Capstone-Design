@@ -13,17 +13,22 @@ public class Detail {
     @Column(name = "detail_id")
     private Long id;
 
-    private String introduction;
-
     private String service;
 
-    @Column(name = "parking_yn")
-    private boolean parkingYN;
+    @Column(name = "place_time", length = 500)
+    private String placeTime;
+
+    @Column(name = "place_facility")
+    private String placeFacility;
+
+    @Column(name = "place_homepage_url", length = 500)
+    private String PlaceHomepageUrl;
 
     @Builder
-    public Detail(String introduction, String service, boolean parkingYN){
-        this.introduction = introduction;
+    public Detail(String placeFacility, String service, String placeHomepageUrl, String placeTime){
         this.service = service;
-        this.parkingYN = parkingYN;
+        this.placeFacility = placeFacility;
+        this.placeTime = placeTime;
+        this.PlaceHomepageUrl = placeHomepageUrl;
     }
 }

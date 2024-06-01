@@ -12,16 +12,13 @@ import java.util.Collection;
 import java.util.List;
 
 
-@Table(name = "user_table")
-
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Table(name = "user")
 public class User implements UserDetails {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

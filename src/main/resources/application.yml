@@ -1,5 +1,6 @@
 spring:
 
+
   profiles:
     include: API-KEY, MYSQL
 
@@ -17,6 +18,7 @@ spring:
 
 
 
+
 logging:
     level:
       org.hibernate:
@@ -24,4 +26,7 @@ logging:
         type: trace # 쿼리에(?,?,?) 값의 상세 값
 
 
+
+
+    
 

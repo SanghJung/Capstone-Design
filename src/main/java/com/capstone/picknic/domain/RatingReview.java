@@ -17,19 +17,19 @@ public class RatingReview {
     @Column(name = "rating_review_id")
     private Long id;
 
-    @Column(name = "visitor_reviews_cnt")
-    private int visitorReviewsCnt;
+    @Column(name = "visitor_reviews")
+    private int visitorReviews;
 
-    @Column(name = "blog_reviews_cnt")
-    private int blogReviewsCnt;
+    @Column(name = "blog_reviews")
+    private int blogReviews;
 
     @Column(name = "rating_value")
     private float ratingValue;
 
     @Builder
-    public RatingReview(int visitorReviewsCnt, int blogReviewsCnt, float rating) {
-        this.blogReviewsCnt = blogReviewsCnt;
-        this.visitorReviewsCnt = visitorReviewsCnt;
+    public RatingReview(int visitorReviews, int blogReviews, float rating) {
+        this.blogReviews = blogReviews;
+        this.visitorReviews = visitorReviews;
         this.ratingValue = rating;
     }
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "menu")
+@Table(name = "scrap")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Scrap {
 
