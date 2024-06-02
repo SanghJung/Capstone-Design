@@ -11,7 +11,10 @@ import com.capstone.picknic.repository.PlaceRepository;
 
 
 import com.capstone.picknic.repository.RestaurantRepository;
+import com.capstone.picknic.service.ActivityService;
+import com.capstone.picknic.service.CafeService;
 import com.capstone.picknic.service.PlaceService;
+import com.capstone.picknic.service.RestaurantService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,9 @@ public class CrossController {
     private RestaurantRepository restaurantRepository;
 
     private final PlaceService placeService;
+    private final RestaurantService restaurantService;
+    private final CafeService cafeService;
+    private final ActivityService activityService;
 
 
 
@@ -92,6 +98,22 @@ public class CrossController {
     @PostMapping("/place")
     public ResponseEntity<List<PlaceDetailsDto>> getPlaceDetails() {
         List<PlaceDetailsDto> placeDetailsDtoList = placeService.allPlaceDetails();
+        return ResponseEntity.ok(placeDetailsDtoList);
+    }
+
+    @PostMapping("/place/restaurant")
+    public ResponseEntity<List<PlaceDetailsDto>> getRestaurantDetails() {
+        List<PlaceDetailsDto> placeDetailsDtoList = restaurantService.allPlaceDetails();
+        return ResponseEntity.ok(placeDetailsDtoList);
+    }
+    @PostMapping("/place/cafe")
+    public ResponseEntity<List<PlaceDetailsDto>> getCafeDetails() {
+        List<PlaceDetailsDto> placeDetailsDtoList = cafeService.allPlaceDetails();
+        return ResponseEntity.ok(placeDetailsDtoList);
+    }
+    @PostMapping("/place/activity")
+    public ResponseEntity<List<PlaceDetailsDto>> getActivityDetails() {
+        List<PlaceDetailsDto> placeDetailsDtoList = activityService.allPlaceDetails();
         return ResponseEntity.ok(placeDetailsDtoList);
     }
 
