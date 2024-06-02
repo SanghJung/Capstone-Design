@@ -27,6 +27,8 @@ public class FlaskController {
     public static void main(String[] args){
         SpringApplication.run(FlaskController.class, args);
     }
+
+
 }
 
 
@@ -41,7 +43,7 @@ class GptController {
     public String unChosenPlace() { // @RequestBody 제거
 
         // Flask 서버 URL 설정
-        String flaskServerUrl = "http://localhost:5000/unchosen"; // 엔드포인트 변경
+        String flaskServerUrl = "http://localhost:5000/recommend"; // 엔드포인트 변경
 
         // RestTemplate을 사용하여 Flask 서버에 POST 요청 보내기
         RestTemplate restTemplate = new RestTemplate();
@@ -54,7 +56,7 @@ class GptController {
     @PostMapping("/chosen/{id}")
     public ResponseEntity<?> chosenPlace(@PathVariable Long id) {
 
-        String ChosenFlaskServerUrl = "http://localhost:5000/chosen";
+        String ChosenFlaskServerUrl = "http://localhost:5000/recommend_v2";
 
         PlaceDetailsDto placeDetailsDto = placeService.getPlaceDetailsById(id);
         if (placeDetailsDto == null) {
