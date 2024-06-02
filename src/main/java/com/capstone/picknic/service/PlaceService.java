@@ -1,5 +1,7 @@
 package com.capstone.picknic.service;
 
+
+import com.capstone.picknic.domain.place.Place;
 import com.capstone.picknic.domain.Detail;
 import com.capstone.picknic.domain.Menu;
 import com.capstone.picknic.domain.RatingReview;
@@ -11,6 +13,7 @@ import com.capstone.picknic.dto.place.response.PlaceDetailsDto;
 import com.capstone.picknic.dto.place.response.PlaceInfoDto;
 import com.capstone.picknic.dto.place.response.PlaceNameUrlDto;
 import com.capstone.picknic.repository.MenuRepository;
+
 import com.capstone.picknic.repository.PlaceRepository;
 import jakarta.persistence.DiscriminatorValue;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -104,5 +109,37 @@ public class PlaceService {
         return place;
     }
 
+
+
+    //flask서버 연동 service
+    public Place getPlaceById(Long id) {
+        Optional<Place> place = placeRepository.findById(id);
+        return place.orElse(null);
+
+    }
+/*
+    public PlaceDetailsDto getPlaceDetailsById(Long id) {
+        Optional<Place> placeOptional = placeRepository.findById(id);
+        if (placeOptional.isPresent()) {
+            Place place = placeOptional.get();
+            String placeType = place.getClass().getAnnotation(DiscriminatorValue.class).value();
+            return PlaceDetailsDto.builder()
+                    .placeType(placeType)
+                    .build();
+        }
+        return null;
+    }
+*/
+
+    public PlaceDetailsDto getPlaceDetailsById(Long id) {
+        return placeRepository.findById(id)
+                .map(place -> PlaceDetailsDto.builder()
+                        .id(place.getId())
+                        .placeType(place.getClass().getAnnotation(DiscriminatorValue.class).value())
+                        .build())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장소입니다."));
+        // or
+        // .orElse(null); // 또는 기본 PlaceDetailsDto 반환
+    }
 
 }
