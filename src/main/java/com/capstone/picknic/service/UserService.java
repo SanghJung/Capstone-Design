@@ -27,6 +27,10 @@ public class UserService implements UserDetailsService {
         if(user.isPresent()) {throw new IllegalArgumentException("존재하는 아이디입니다.");}
     }
 
+    public Optional<User> findByLoginId(String loginId) {
+        return userRepository.findByLoginId(loginId);
+    }
+
     @Transactional
     public Long save(UserDto userDto){   //회원 정보 추가 메서드
         checkDuplicatedLoginId(userDto.getLoginId());
@@ -46,4 +50,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new IllegalArgumentException(loginId));
     }
+
+
 }
