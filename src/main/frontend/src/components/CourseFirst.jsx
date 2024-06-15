@@ -2,15 +2,17 @@ import {useEffect, useState} from 'react'
 import {Container, Col, Row} from 'react-bootstrap'
 import {Map, Polygon, CustomOverlayMap} from 'react-kakao-maps-sdk'
 import {AreaBadge} from './shared/firstpage/Areabadge'
-import {OptionBar} from './shared/firstpage/OptionBar'
 import {OptionBarContainer} from './shared/firstpage/OptionBarContainer'
 import {fetchPlaces} from '../api/getAllData'
 import {placeDataState} from '../state/places'
 import {useRecoilState} from 'recoil'
 import styled from 'styled-components'
-import {Areas} from './shared/data/areas'
-import {center, level} from './shared/data/default_map'
-import {outerRectanglePath} from './shared/data/outerRectangle'
+import {Areas} from '../data/areas'
+import {center, level} from '../data/default_map'
+import {outerRectanglePath} from '../data/outerRectangle'
+import {gangnamArea} from '../data/default_map'
+import {Colors} from '../utils/Colors'
+import getCenteroid from '../utils/getCentroid'
 
 export const CourseFirst = () => {
   const [placeData, setPlaceData] = useRecoilState(placeDataState)
@@ -19,11 +21,7 @@ export const CourseFirst = () => {
   const [, setMousePosition] = useState({lat: 0, lng: 0})
   const [, setSelectedPlace] = useState(null)
   const [, setSelectedPlaceLocal] = useState(null)
-  const [clickedArea, setClickedArea] = useState({
-    area: 38731528,
-    name: '강남구',
-    position: {lat: 37.51507332009245, lng: 127.04452102475092},
-  })
+  const [clickedArea, setClickedArea] = useState(gangnamArea)
 
   const onMouseMove = (_map, mouseEvent) => {
     setMousePosition({
@@ -47,6 +45,8 @@ export const CourseFirst = () => {
           addresses: data.map((v) => v.addressName),
           phoneNumber: data.map((v) => v.phoneNumber),
           placeUrl: data.map((v) => v.thumbnailUrl),
+          ratingReview: data.map((v) => v.ratingReview),
+          place_type: data.map((v) => v.place_type),
         }
         setPlaceData(newData)
       })
@@ -78,8 +78,8 @@ export const CourseFirst = () => {
           <Polygon
             path={outerRectanglePath}
             strokeWeight={2}
-            strokeColor={'#FF0000'}
-            fillColor={'#FBF3F7'}
+            strokeColor={Colors.strokePink}
+            fillColor={Colors.fillPink}
             fillOpacity={1}
           />
           {areas.map((area, index) => (
@@ -87,11 +87,9 @@ export const CourseFirst = () => {
               key={`area-${area.name}`}
               path={area.path}
               strokeWeight={3}
-              strokeColor={'#FACCCA'}
+              strokeColor={Colors.mapLinePink}
               strokeOpacity={1}
-              fillColor={
-                area.isMouseover || area.isOnClick ? '#F85F9C' : '#fff'
-              }
+              fillColor={area.isMouseover || area.isOnClick ? Colors.mapFillPink : Colors.white}
               fillOpacity={1}
               onMouseover={() =>
                 setAreas((prev) =>
@@ -116,8 +114,8 @@ export const CourseFirst = () => {
                   area: Math.floor(polygon.getArea()),
                   name: area.name,
                 })
-                setAreas((prev) =>
-                  prev.map((item, i) =>
+                setAreas((previous) =>
+                  previous.map((item, i) =>
                     i === index
                       ? {...item, isOnClick: true}
                       : {...item, isOnClick: false}
@@ -129,9 +127,11 @@ export const CourseFirst = () => {
           {areas.map((area) => (
             <CustomOverlayMap
               key={`overlay-${area.name}`}
-              position={getCentroid(area.path)}
+              position={getCenteroid(area.path)}
             >
-              <span style={{fontSize: '10px'}}>{area.name}</span>
+              <StyledSpan>
+                {area.name}
+              </StyledSpan>
             </CustomOverlayMap>
           ))}
         </Seoul>
@@ -140,22 +140,21 @@ export const CourseFirst = () => {
         <Row>
           <Col>
             <StyledRow>
-              <h1 style={{fontWeight: '700'}}>
+              <StyledTitle>
                 반갑습니다, <br />
-                <span style={{color: '#FC609F'}}>봄이 그렇게도 좋냐</span>님.
-                <br />
+                <span style={{color: Colors.hotPink}}>봄이 그렇게도 좋냐</span>님. <br />
                 어디를 방문하실 예정인가요?
-              </h1>
+              </StyledTitle>
               <SubTitle>
                 추천 AI가 추천 경로를 제공할 수 있도록 아래 지도에서 방문할 '구'
                 <br />를 선택해주시고 오른쪽 팝업창에서 '특정 장소'를
                 선택해주세요.
               </SubTitle>
             </StyledRow>
-            <OptionBar />
+            {/* <OptionBar /> */}
           </Col>
           <Col>
-            <Row style={{overflow: 'visible', position: 'relative'}}>
+            <StyledRightRow>
               <ClickableCol>
                 <OptionBarContainer
                   clickedArea={clickedArea}
@@ -164,10 +163,10 @@ export const CourseFirst = () => {
                   setSelectedPlaceLocal={setSelectedPlaceLocal}
                 />
               </ClickableCol>
-              <Col style={{flexGrow: 1}}>
+              <StyledAreaBadgeCol>
                 <AreaBadge clickedArea={clickedArea} />
-              </Col>
-            </Row>
+              </StyledAreaBadgeCol>
+            </StyledRightRow>
           </Col>
         </Row>
       </StyledComponent>
@@ -178,7 +177,7 @@ export const CourseFirst = () => {
 const Seoul = styled(Map)`
   width: 100%;
   height: 800px;
-  backgroundcolor: #f7eef3;
+  backgroundcolor: ${Colors.backgroundPink};
 `
 
 const StyledContainer = styled(Container)`
@@ -194,6 +193,9 @@ const StyledComponent = styled.div`
   left: 300px;
   z-index: 10;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const StyledRow = styled(Row)`
@@ -202,11 +204,11 @@ const StyledRow = styled(Row)`
 
 const ClickableCol = styled(Col)`
   pointer-events: auto;
-  backgroundcolor: white;
+  background-color: white;
   opacity: 80;
   flex-grow: 4;
   position: relative;
-  borderradius: 20px;
+  border-radius: 20px;
   padding: 25px;
   z-index: 20;
 `
@@ -217,16 +219,28 @@ const SubTitle = styled.p`
   font-size: 20px;
 `
 
-function getCentroid(coordinates) {
-  var xSum = 0
-  var ySum = 0
+const StyledTitle = styled.h1`
+  font-weight: 700;
+  padding-top: 10px;
+  padding-bottom: 5px;
+`
 
-  const numPoints = coordinates.length
+const StyledSpan = styled.span`
+  fontSize: 14px;
+  color: ${Colors.basicGray};
+  fontWeight: 700;
+`
 
-  coordinates.forEach((point) => {
-    xSum += point.lat
-    ySum += point.lng
-  })
+const StyledAreaBadgeCol = styled(Col)`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 
-  return {lat: xSum / numPoints, lng: ySum / numPoints}
-}
+`
+
+const StyledRightRow = styled(Row)`
+  overflow: visible;
+  position: relative;
+  align-items: center;
+  flex-wrap: nowrap;
+`
