@@ -6,18 +6,20 @@ import {CreateCourse} from './components/CreateCourse'
 import {AddVisitPurpose} from './components/AddVisitPurpose'
 import {AddDescription} from './components/AddDescription'
 import {CourseFirst} from './components/CourseFirst'
+import {CourseSecond} from './components/CourseSecond'
 import {CreateCourseEnd} from './components/CreateCourseEnd'
 import {CourseFinal} from './components/CourseFinal'
 import {ROUTES} from './Routes'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <RecoilRoot>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path={ROUTES.GENERATE_COURSE} element={<CourseFirst />} />
+          <Route path={ROUTES.SELECT_COURSE} element={<CourseFirst />} />
+          <Route path={ROUTES.GENERATE_COURSE} element={<CourseSecond />} />
           <Route path={ROUTES.COURSE_FINAL} element={<CourseFinal />} />
           <Route path={ROUTES.CREATE_COURSE_NAME} element={<CreateCourse />} />
           <Route path={ROUTES.ADD_VISIT_PURPOSE} element={<AddVisitPurpose />}/>
@@ -28,5 +30,3 @@ function App() {
     </BrowserRouter>
   )
 }
-
-export default App
