@@ -1,0 +1,16 @@
+export const Colors = {
+  BASIC_BLACK: '#000000',
+  BASIC_WHITE: '#FFFFFF',
+  BASIC_GRAY: '#BFBFBF',
+  gray: '#A2ADB7',
+  backgroundPink: '#f7eef3',
+  HOT_PINK: '#FC609F',
+  strokePink: '#FF0000',
+  fillPink: '#FBF3F7',
+  white: '#FFF',
+  mapLinePink: '#FACCCA',
+  mapFillPink: '#F85F9C',
+  titlePink: '#A2ADB7',
+  STAR_PINK: '#EB539F',
+  BORDER_PINK: '#FF6EC7',
+}
