@@ -10,14 +10,10 @@ import API_URLS from '../api/config'
 import {Areas} from '../data/areas'
 import {ZoomedInMapComponent} from './shared/secondpage/ZoomedInMapComponent'
 import {PlaceInfoContainer} from './shared/secondpage/PlaceInfoContainer'
-import { categoryMap } from '../type/categoryType'
+import {categoryMap} from '../type/categoryType'
 
-const center = {
-  lat: 37.490728250649646,
-  lng: 127.10433125798602,
-}
-const defaultMapLevel = 9
-const updatedMapLevel = 7
+const center = {lat: 37.490728250649646, lng: 127.10433125798602}
+const [defaultMapLevel, updatedMapLevel] = [9, 7]
 
 export const CourseSecond = () => {
   const navigate = useNavigate()
@@ -63,7 +59,6 @@ export const CourseSecond = () => {
           return null
         })
         .filter((item) => item !== null)
-      console.log('filtered:', filtered)
       setFilteredData(filtered)
     }
   }, [data, selectedCourse])
@@ -93,18 +88,21 @@ export const CourseSecond = () => {
     try {
       let apiUrl
       if (place_id) {
+        console.log(place_id)
         apiUrl = API_URLS.CHOSEN_PLACE(place_id)
       } else {
         apiUrl = API_URLS.UNCHOSEN_PLACE
       }
       const response = await axios.post(apiUrl)
-      navigate('/coursesecond', {state: {data: response.data, place_id}})
+      navigate('/coursesecond', {state: {data: response.data, place_id, index}})
     } catch (error) {
       console.error('Error: ', error)
     }
   }
 
-  const gangnamArea = Areas.find((area) => area.name === index)
+  const gangnamArea =
+    Areas.find((area) => area.name === index) ||
+    Areas.find((area) => area.name === '강남구')
 
   const markers = positions
     .map((position, index) => {
@@ -125,7 +123,6 @@ export const CourseSecond = () => {
     })
     .filter((marker) => marker !== null)
 
-  console.log('markers' + JSON.stringify(markers, null, 2))
   const paths = markers.map((marker) => marker.position)
 
   return (
@@ -169,5 +166,3 @@ const StyledUpperLayerContainer = styled(Container)`
   left: 300px;
   z-index: 10;
 `
-
-export default CourseSecond
