@@ -31,7 +31,9 @@ export const KakaoMap = () => {
   const [openMarkerIndex, setOpenMarkerIndex] = useState(null)
   const [openSidebar, setOpenSidebar] = useState(false)
   const [openEditSidebar, setOpenEditSidebar] = useState(false)
+  const [openNavigationSidebar, setOpenNavigationSidebar] = useState(false)
   const [mapLevel, setMapLevel] = useState(defaultMapLevel)
+  const [,] = useState()
 
   const [key, setKey] = useState(0)
 
@@ -43,10 +45,6 @@ export const KakaoMap = () => {
   const [markers, set_test_markers] = useRecoilState(markersState)
 
   const paths = markers.map((marker) => marker.position)
-  useEffect(() => {
-    console.log('-----------replaceData-------------')
-    console.log(replaceData)
-  }, [replaceData])
 
   const changeLocation = (selectedPlace) => {
     const updatedMarkers = markers.map((v) => {
@@ -102,10 +100,6 @@ export const KakaoMap = () => {
     if (markerPosition.lat !== 0 && markerPosition.lng !== 0) setKey(1)
   }, [markerPosition])
 
-  useEffect(() => {
-    console.log('place0-0----Info:' + JSON.stringify(placeInfo, null, 2))
-  }, [placeInfo])
-
   const clickReplacePlace = (index) => {
     const place = {
       id: placeData.id[index],
@@ -144,25 +138,20 @@ export const KakaoMap = () => {
     return responseWithIndex.map((item) => item.index)
   }
 
-  const handleEdit = async (id) => {
+  const handleEdit = async () => {
     try {
-      const main = placeData.positions[id - 1] // {"lat": 37.52608666907984, "lng": 127.03537543435476}
-      const response = placeData.positions // 모든 포지션 정보 일단 넣어놓기??
-
-      const sortedIndices = getSortedIndicesByDistance(main, response)
-
-      console.log('여기요!!!! : ' + JSON.stringify(main, null, 2))
-      console.log('Sorted Indices:', sortedIndices)
       setOpenSidebar(false)
       setOpenEditSidebar(true)
-      //setReplaceData(sortedIndices)
+      setOpenNavigationSidebar(false)
     } catch (error) {
       console.log(error)
     }
   }
 
   const handleNavigation = () => {
-    console.log('길찾기')
+    setOpenSidebar(false)
+    setOpenEditSidebar(false)
+    setOpenNavigationSidebar(true)
   }
 
   const handleStoreInfo = async (id) => {
@@ -170,6 +159,7 @@ export const KakaoMap = () => {
       const response = await axios.post(`http://localhost:8080/api/info`, {id})
       setPlaceInfo(response.data)
       setOpenSidebar(true)
+      setOpenNavigationSidebar(false)
     } catch (error) {
       console.log(error)
     }
@@ -183,11 +173,14 @@ export const KakaoMap = () => {
   const closeSideBar = () => {
     setOpenSidebar(false)
     setOpenEditSidebar(false)
+    setOpenNavigationSidebar(false)
+    setSelectedPlace(null)
   }
 
   const closeSideAndInfo = () => {
     setOpenSidebar(false)
     setOpenEditSidebar(false)
+    setOpenNavigationSidebar(false)
     setOpenMarkerIndex(null)
     setMapLevel(defaultMapLevel)
   }
@@ -649,13 +642,46 @@ export const KakaoMap = () => {
                         fontColor={'#FF0431'}
                         backgroundColor={'#ffffff'}
                         borderColor={'#FF0431'}
-                        onClick={() => changeLocation(selectedPlace)}
+                        onClick={() => {
+                          changeLocation(selectedPlace)
+                          closeSideAndInfo()
+                        }}
                       >
                         여기로 바꾸겠습니다.
                       </StyledButton>
                       <StyledButton>그냥 그대로 둘래요!</StyledButton>
                     </ButtonLayout>
                   )}
+                </SideBarContainer>
+              )
+            } else if (
+              openMarkerIndex !== null &&
+              index === openMarkerIndex &&
+              openNavigationSidebar
+            ) {
+              return (
+                <SideBarContainer>
+                  <SideBarClosedButton onClick={closeSideBar}>
+                    ×
+                  </SideBarClosedButton>
+                  <h4 style={{fontWeight: 600, color: 'gray'}}>
+                    해당 장소 길찾기
+                  </h4>
+                  <Container>
+                    <Row>
+                      <h2>#{marker.place} 경로 미리 보기</h2>
+                    </Row>
+                    <Row style={{height: '400px', backgroundColor: 'gray'}}>
+                      <Map
+                        center={marker.position}
+                        draggable={false}
+                        level={7}
+                      ></Map>
+                    </Row>
+                  </Container>
+                  <Container>
+                    <h2>이 전 장소에서 #{marker.place}로 가는 길</h2>
+                  </Container>
                 </SideBarContainer>
               )
             }
