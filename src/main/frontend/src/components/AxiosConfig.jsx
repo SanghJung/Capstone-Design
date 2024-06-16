@@ -34,6 +34,7 @@ instance.interceptors.response.use(
 
         if (error.response && error.response.status === 403 || error.response.status === 401) {
             console.error('인증 오류:', error.response.data);
+            alert('로그인을 해주세요');
             localStorage.removeItem('token');
             window.location.href = '/login'; // 로그인 페이지로 리다이렉트
             // 여기에 토큰 갱신 또는 로그아웃 로직 추가 가능

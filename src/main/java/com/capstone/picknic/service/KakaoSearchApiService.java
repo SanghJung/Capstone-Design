@@ -17,7 +17,6 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-
 public class KakaoSearchApiService {
 
     private final RestaurantService restaurantService;

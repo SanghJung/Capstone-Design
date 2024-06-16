@@ -1,10 +1,12 @@
 package com.capstone.picknic.service;
 
 import com.capstone.picknic.domain.User;
+import com.capstone.picknic.dto.UserDatailsDto;
 import com.capstone.picknic.dto.UserDto;
 import com.capstone.picknic.dto.UserUpdateDto;
 import com.capstone.picknic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -46,9 +48,9 @@ public class UserService implements UserDetailsService {
     }
 
     @Override //login_id로 사용자 정보 가져오는 메서드
-    public User loadUserByUsername(String loginId){
-        return userRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new IllegalArgumentException(loginId));
+    public UserDetails loadUserByUsername(String loginId){
+        User user = userRepository.findByLoginId(loginId).get();
+        return new UserDatailsDto(user);
     }
 
 
