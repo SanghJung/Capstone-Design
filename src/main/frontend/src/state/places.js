@@ -11,5 +11,6 @@ export const placeDataState = atom({
     addresses: [],
     phoneNumber: [],
     placeUrl: [],
+    ratingReview: [],
   },
 })
