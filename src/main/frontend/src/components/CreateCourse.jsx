@@ -1,10 +1,11 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSetRecoilState} from 'recoil'
 import {courseNameState} from '../state/courseName'
 import {Form} from 'react-bootstrap'
 import {CenteredOverayForm} from './CenteredOverayForm'
 import {ROUTES} from '../Routes'
+import axios from "./AxiosConfig";
 
 export const CreateCourse = () => {
   const [validated, setvalidated] = useState(false)
@@ -12,6 +13,13 @@ export const CreateCourse = () => {
   const setCourseName = useSetRecoilState(courseNameState)
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const verifyToken = async () => {
+        await axios.post('/jwtTest'); // 서버에서 토큰 검증 요청
+    };
+
+    verifyToken();
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault()
     const form = e.currentTarget

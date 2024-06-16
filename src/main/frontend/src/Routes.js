@@ -1,4 +1,6 @@
 export const ROUTES = {
+  LOGIN: '/login',
+  SIGNUP: '/signUp',
   //GENERATE_COURSE: '/coursefirst',
   COURSE_FINAL: '/coursefinal',
   CREATE_COURSE_NAME: '/course/1',

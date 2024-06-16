@@ -1,10 +1,7 @@
 package com.capstone.picknic.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Getter
 @Table(name = "course")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Course {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
@@ -25,9 +23,18 @@ public class Course {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "course")
-    private List<CourseHashtag> courseHashtagList = new ArrayList<>();
+    private String hashtags;
 
     @OneToMany(mappedBy = "course")
     private List<CoursePlace> coursePlaceList = new ArrayList<>();
+
+    @Builder
+    public Course(String courseName, User user, String hashtags, List<CoursePlace> coursePlaceList) {
+        this.CourseName = courseName;
+        this.user = user;
+        this.hashtags = hashtags;
+        this.coursePlaceList = coursePlaceList;
+    }
+
+
 }

@@ -7,9 +7,14 @@ import {FaLocationDot} from 'react-icons/fa6'
 import {IoPhonePortraitSharp} from 'react-icons/io5'
 import {CiShop} from 'react-icons/ci'
 
+const defaultMapLevel = 9
+const updatedMapLevel = 7
+
 export const KakaoMap = ({markers}) => {
   const [openMarkerIndex, setOpenMarkerIndex] = useState(null)
   const [openSidebar, setOpenSidebar] = useState(false)
+  const [markerPosition, setMarkerPosition] = useState({lat: 33.4, lng: 126.8})
+  const [mapLevel, setMapLevel] = useState(defaultMapLevel)
 
   const paths = markers.map((marker) => marker.position)
 
@@ -23,30 +28,29 @@ export const KakaoMap = ({markers}) => {
   }
 
   const handleEdit = () => {
-    // 수정 로직 추가
+    // TODO: 수정 로직 추가
     console.log('수정')
   }
 
   const handleDelete = () => {
-    // 삭제 로직 추가
+    // TODO: 삭제 로직 추가
     console.log('삭제')
   }
 
-  const closeSideBar = () => {
-    setOpenSidebar(false)
-  }
+  const closeSideBar = () => setOpenSidebar(false)
 
   const closeSideAndInfo = () => {
     setOpenSidebar(false)
     setOpenMarkerIndex(null)
+    setMapLevel(defaultMapLevel)
   }
 
   return (
     <>
       <Map
-        center={{lat: 33.4, lng: 126.8}} // 나중에 기준 좌표 받을 것
-        style={{width: '1200px', height: '700px'}} // 지도 크기
-        level={9} // 지도 확대 레벨
+        center={{lat: markerPosition.lat, lng: markerPosition.lng}}
+        style={{width: '1200px', height: '700px'}} // 지도 크기 fixed
+        level={mapLevel}
       >
         {markers.map((marker, index) => (
           <>
@@ -58,9 +62,11 @@ export const KakaoMap = ({markers}) => {
                 size: {width: 64, height: 69},
                 options: {offset: {x: 32, y: 69}},
               }}
-              onClick={() =>
+              onClick={() => {
                 setOpenMarkerIndex(index === openMarkerIndex ? null : index)
-              }
+                setMarkerPosition(marker.position)
+                setMapLevel(updatedMapLevel)
+              }}
             />
             {openMarkerIndex === index && (
               <CustomOverlayMap

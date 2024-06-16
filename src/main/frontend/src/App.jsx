@@ -2,6 +2,8 @@ import './App.scss'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {RecoilRoot} from 'recoil'
 import {Main} from './components/Main'
+import {Login} from './components/Login'
+import {SignUp} from './components/SignUp'
 import {CreateCourse} from './components/CreateCourse'
 import {AddVisitPurpose} from './components/AddVisitPurpose'
 import {AddDescription} from './components/AddDescription'
@@ -17,6 +19,8 @@ function App() {
       <RecoilRoot>
         <Routes>
           <Route path='/' element={<Main />} />
+          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={ROUTES.SIGNUP} element={<SignUp />} />
           {/* <Route path={ROUTES.GENERATE_COURSE} element={<CourseFirst />} /> */}
           <Route path={ROUTES.COURSE_FINAL} element={<CourseFinal />} />
           <Route path={ROUTES.CREATE_COURSE_NAME} element={<CreateCourse />} />
