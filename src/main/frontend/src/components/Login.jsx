@@ -8,7 +8,7 @@ import axios from "axios";
 export const Login = () => {
     const [loginId, setLoginId] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -35,6 +35,9 @@ export const Login = () => {
         }
 
     }
+    const locationSignUp = (e) => {
+        navigate(ROUTES.SIGNUP);
+    }
     const onUserIdHandler = (e) => {
         setLoginId(e.currentTarget.value);
     }
@@ -50,7 +53,7 @@ export const Login = () => {
                 <StyledInput type = "text" placeholder="아이디를 입력하세요" onChange={onUserIdHandler}></StyledInput>
                 <StyledInput type = "password" placeholder="비밀번호를 입력하세요" onChange={onPasswordHandler}></StyledInput>
                 <StyledLoginBtn type="submit"> 로그인 </StyledLoginBtn>
-                <StyleSignUpBtn> 회원가입 </StyleSignUpBtn>
+                <StyleSignUpBtn onClick={locationSignUp}> 회원가입 </StyleSignUpBtn>
             </StyledLoginForm>
         </StyledContainer>
     )

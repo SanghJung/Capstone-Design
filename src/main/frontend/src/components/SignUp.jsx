@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from 'styled-components'
-import axios from "./AxiosConfig";
+import axios from "axios";
+import {ROUTES} from "../Routes";
 
 
 export const SignUp = () => {
@@ -10,16 +11,32 @@ export const SignUp = () => {
     const [nickname, setNickname] = useState("");
     const navigate = useNavigate()
 
-    const handleSignUp= async (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
 
         let body = {
             loginId : loginId,
             password : password,
             nickname : nickname
+        };
+
+        try {
+            const response= await axios.post('http://localhost:8080/signUp', body, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                withCredentials : true
+            });
+            alert('회원가입 성공');
+            navigate(ROUTES.LOGIN);
+
+        } catch (error) {
+            console.error('회원가입이 실패했습니다.:', error);
+            alert("회원가입이 실패했습니다.");
         }
     }
-    const onLoginIddHandler = (e) => {
+
+    const onLoginIdHandler = (e) => {
         setLoginId(e.currentTarget.value);
     }
     const onPasswordHandler = (e) => {
@@ -31,13 +48,13 @@ export const SignUp = () => {
     }
     return (
         <StyledContainer>
-            <StyledLoginForm>
+            <StyledLoginForm onSubmit = {handleSignUp}>
                 <StyledLogo>Picknic.</StyledLogo>
                 <div>회원가입</div>
                 <StyledInput type = "text" placeholder="이름을 입력하세요" onChange={onNicknameHandler}></StyledInput>
-                <StyledInput type = "text" placeholder="아이디를 입력하세요" onChange={onLoginIddHandler}></StyledInput>
+                <StyledInput type = "text" placeholder="아이디를 입력하세요" onChange={onLoginIdHandler}></StyledInput>
                 <StyledInput type = "password" placeholder="비밀번호를 입력하세요" onChange={onPasswordHandler}></StyledInput>
-                <StyleSignUpBtn> 회원가입 </StyleSignUpBtn>
+                <StyleSignUpBtn type = "submit"> 회원가입 </StyleSignUpBtn>
             </StyledLoginForm>
         </StyledContainer>
     )
